@@ -1,0 +1,35 @@
+//
+//  IAWorkspace.m
+//  RTImageAssets
+//
+//  Created by ricky on 14-12-10.
+//  Copyright (c) 2014年 rickytan. All rights reserved.
+//
+
+#import "XcodeIDE.h"
+#import "IAWorkspace.h"
+
+@implementation IAWorkspace
+
++ (IDEWorkspaceWindowController *)keyWindowController
+{
+    NSArray *workspaceWindowControllers = [NSClassFromString(@"IDEWorkspaceWindowController") valueForKey:@"workspaceWindowControllers"];
+    for (IDEWorkspaceWindowController *controller in workspaceWindowControllers) {
+        if (controller.window.isKeyWindow) {
+            return controller;
+        }
+    }
+    return nil;
+}
+
++ (IDEWorkspace *)workspaceForKeyWindow
+{
+    return [[self keyWindowController] valueForKey:@"_workspace"];
+}
+
++ (NSString *)currentWorkspacePath
+{
+    return [self workspaceForKeyWindow].representingFilePath.pathString;
+}
+
+@end

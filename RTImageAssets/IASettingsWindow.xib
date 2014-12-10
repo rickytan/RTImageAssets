@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="IASettingsWindow">
+            <connections>
+                <outlet property="downscaleRadio" destination="bGQ-U7-Dnd" id="YSW-np-rkI"/>
+                <outlet property="nonretinaButton" destination="ICL-uT-CO0" id="eTL-0l-SSl"/>
+                <outlet property="upscaleButton" destination="KKm-C8-LBl" id="xqX-mt-ocF"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <rect key="contentRect" x="196" y="240" width="320" height="140"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <value key="minSize" type="size" width="320" height="285"/>
+            <value key="maxSize" type="size" width="320" height="285"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="ICL-uT-CO0">
+                        <rect key="frame" x="18" y="104" width="181" height="18"/>
+                        <buttonCell key="cell" type="check" title="Also generate non-retina" bezelStyle="regularSquare" imagePosition="left" inset="2" id="45R-0f-haf">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="onNonretina:" target="-2" id="XqJ-qM-tkR"/>
+                        </connections>
+                    </button>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="KKm-C8-LBl">
+                        <rect key="frame" x="18" y="84" width="210" height="18"/>
+                        <buttonCell key="cell" type="check" title="Upscale 2x to 3x if NOT exists" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Kzl-nL-eKa">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="onUpscale:" target="-2" id="62k-MG-HBB"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DKB-pL-3y4">
+                        <rect key="frame" x="20" y="61" width="169" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Downscale to 2x based on" id="av6-bH-aaW">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTa-pa-WqL">
+                        <rect key="frame" x="277" y="96" width="25" height="25"/>
+                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lQW-bh-dg7">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="onHelp:" target="-2" id="SAv-PV-ddv"/>
+                        </connections>
+                    </button>
+                    <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bGQ-U7-Dnd">
+                        <rect key="frame" x="20" y="35" width="280" height="18"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="77" height="18"/>
+                        <size key="intercellSpacing" width="4" height="2"/>
+                        <buttonCell key="prototype" type="radio" title="iPhone 5" imagePosition="left" alignment="center" state="on" inset="2" id="QoH-oN-f0V">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <cells>
+                            <column>
+                                <buttonCell type="radio" title="iPhone 5" imagePosition="left" alignment="center" state="on" inset="2" id="NZ0-BZ-MgM">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </column>
+                            <column>
+                                <buttonCell type="radio" title="iPhone 6" imagePosition="left" alignment="center" inset="2" id="wvG-DG-Uvf">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </column>
+                        </cells>
+                        <connections>
+                            <action selector="onRadio:" target="-2" id="FHv-AO-ClM"/>
+                        </connections>
+                    </matrix>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="bGQ-U7-Dnd" secondAttribute="trailing" constant="20" id="1RR-Gc-Mxw"/>
+                    <constraint firstItem="DKB-pL-3y4" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="22" id="1Xs-VO-bUT"/>
+                    <constraint firstItem="DKB-pL-3y4" firstAttribute="top" secondItem="KKm-C8-LBl" secondAttribute="bottom" constant="8" id="5lP-Tm-qR5"/>
+                    <constraint firstAttribute="trailing" secondItem="BTa-pa-WqL" secondAttribute="trailing" constant="20" id="AdG-V8-g6Q"/>
+                    <constraint firstItem="ICL-uT-CO0" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="DHK-Zu-cZR"/>
+                    <constraint firstItem="bGQ-U7-Dnd" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="Lhq-e0-vTB"/>
+                    <constraint firstItem="KKm-C8-LBl" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="qua-gW-wsX"/>
+                    <constraint firstItem="bGQ-U7-Dnd" firstAttribute="top" secondItem="DKB-pL-3y4" secondAttribute="bottom" constant="8" id="tM6-e7-2hO"/>
+                    <constraint firstItem="BTa-pa-WqL" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="wNb-kZ-P8E"/>
+                    <constraint firstItem="KKm-C8-LBl" firstAttribute="top" secondItem="ICL-uT-CO0" secondAttribute="bottom" constant="6" id="wSl-rs-x9g"/>
+                    <constraint firstItem="ICL-uT-CO0" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="ytQ-hZ-6SO"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="296" y="526"/>
+        </window>
+    </objects>
+</document>
