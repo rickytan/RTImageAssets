@@ -1,0 +1,278 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9C1218FF1A385DA6002EA7C2 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C1218FE1A385DA6002EA7C2 /* AppKit.framework */; };
+		9C1219011A385DA6002EA7C2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C1219001A385DA6002EA7C2 /* Foundation.framework */; };
+		9C1219061A385DA6002EA7C2 /* RTImageAssets.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 9C1219051A385DA6002EA7C2 /* RTImageAssets.xcscheme */; };
+		9C1219091A385DA6002EA7C2 /* RTImageAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C1219081A385DA6002EA7C2 /* RTImageAssets.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9C1218FB1A385DA6002EA7C2 /* RTImageAssets.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RTImageAssets.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C1218FE1A385DA6002EA7C2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		9C1219001A385DA6002EA7C2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		9C1219041A385DA6002EA7C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C1219051A385DA6002EA7C2 /* RTImageAssets.xcscheme */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = RTImageAssets.xcscheme; path = RTImageAssets.xcodeproj/xcshareddata/xcschemes/RTImageAssets.xcscheme; sourceTree = SOURCE_ROOT; };
+		9C1219071A385DA6002EA7C2 /* RTImageAssets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTImageAssets.h; sourceTree = "<group>"; };
+		9C1219081A385DA6002EA7C2 /* RTImageAssets.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTImageAssets.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9C1218F91A385DA6002EA7C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C1218FF1A385DA6002EA7C2 /* AppKit.framework in Frameworks */,
+				9C1219011A385DA6002EA7C2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9C1218F21A385DA6002EA7C2 = {
+			isa = PBXGroup;
+			children = (
+				9C1219021A385DA6002EA7C2 /* RTImageAssets */,
+				9C1218FD1A385DA6002EA7C2 /* Frameworks */,
+				9C1218FC1A385DA6002EA7C2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9C1218FC1A385DA6002EA7C2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9C1218FB1A385DA6002EA7C2 /* RTImageAssets.xcplugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9C1218FD1A385DA6002EA7C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C1218FE1A385DA6002EA7C2 /* AppKit.framework */,
+				9C1219001A385DA6002EA7C2 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C1219021A385DA6002EA7C2 /* RTImageAssets */ = {
+			isa = PBXGroup;
+			children = (
+				9C1219071A385DA6002EA7C2 /* RTImageAssets.h */,
+				9C1219081A385DA6002EA7C2 /* RTImageAssets.m */,
+				9C1219031A385DA6002EA7C2 /* Supporting Files */,
+			);
+			path = RTImageAssets;
+			sourceTree = "<group>";
+		};
+		9C1219031A385DA6002EA7C2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9C1219041A385DA6002EA7C2 /* Info.plist */,
+				9C1219051A385DA6002EA7C2 /* RTImageAssets.xcscheme */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9C1218FA1A385DA6002EA7C2 /* RTImageAssets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C12190C1A385DA6002EA7C2 /* Build configuration list for PBXNativeTarget "RTImageAssets" */;
+			buildPhases = (
+				9C1218F71A385DA6002EA7C2 /* Sources */,
+				9C1218F81A385DA6002EA7C2 /* Resources */,
+				9C1218F91A385DA6002EA7C2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RTImageAssets;
+			productName = RTImageAssets;
+			productReference = 9C1218FB1A385DA6002EA7C2 /* RTImageAssets.xcplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9C1218F31A385DA6002EA7C2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = rickytan;
+				TargetAttributes = {
+					9C1218FA1A385DA6002EA7C2 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 9C1218F61A385DA6002EA7C2 /* Build configuration list for PBXProject "RTImageAssets" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9C1218F21A385DA6002EA7C2;
+			productRefGroup = 9C1218FC1A385DA6002EA7C2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9C1218FA1A385DA6002EA7C2 /* RTImageAssets */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9C1218F81A385DA6002EA7C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C1219061A385DA6002EA7C2 /* RTImageAssets.xcscheme in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9C1218F71A385DA6002EA7C2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C1219091A385DA6002EA7C2 /* RTImageAssets.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9C12190A1A385DA6002EA7C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		9C12190B1A385DA6002EA7C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+			};
+			name = Release;
+		};
+		9C12190D1A385DA6002EA7C2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(HOME)";
+				INFOPLIST_FILE = RTImageAssets/Info.plist;
+				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xcplugin;
+			};
+			name = Debug;
+		};
+		9C12190E1A385DA6002EA7C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(HOME)";
+				INFOPLIST_FILE = RTImageAssets/Info.plist;
+				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xcplugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9C1218F61A385DA6002EA7C2 /* Build configuration list for PBXProject "RTImageAssets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C12190A1A385DA6002EA7C2 /* Debug */,
+				9C12190B1A385DA6002EA7C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C12190C1A385DA6002EA7C2 /* Build configuration list for PBXNativeTarget "RTImageAssets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C12190D1A385DA6002EA7C2 /* Debug */,
+				9C12190E1A385DA6002EA7C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9C1218F31A385DA6002EA7C2 /* Project object */;
+}
