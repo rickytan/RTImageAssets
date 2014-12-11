@@ -5,4 +5,8 @@
   Created by ricky on 14-12-10.
   Copyright (c) 2014年 rickytan. All rights reserved.
 */
-"Generate" = "生成";
+"Generate" = "生成缺失资源";
+"Settings" = "设置";
+"Processing" = "正在处理资源";
+"OK" = "好";
+"Please Wait" = "请等待处理完成";

@@ -9,13 +9,15 @@
 #import "IASettingsWindow.h"
 
 NSString *IASettingsGenerateNonRetinaKey = @"IASettingsGenerateNonRetinaKey";
-NSString *IASettingsUpscaleKey = @"IASettingsUpscaleKey";
-NSString *IASettingsDownscaleKey = @"IASettingsDownscaleKey";
+NSString *IASettingsUpscaleKey           = @"IASettingsUpscaleKey";
+NSString *IASettingsDownscaleKey         = @"IASettingsDownscaleKey";
+NSString *IASettingsRename               = @"IASettingsRename";
 
 @interface IASettingsWindow ()
 @property (weak) IBOutlet NSButton *nonretinaButton;
 @property (weak) IBOutlet NSButton *upscaleButton;
 @property (weak) IBOutlet NSMatrix *downscaleRadio;
+@property (weak) IBOutlet NSButton *renameButton;
 
 @end
 
@@ -27,12 +29,13 @@ NSString *IASettingsDownscaleKey = @"IASettingsDownscaleKey";
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     self.nonretinaButton.state = [[NSUserDefaults standardUserDefaults] boolForKey:IASettingsGenerateNonRetinaKey] ? NSOnState : NSOffState;
     self.upscaleButton.state = [[NSUserDefaults standardUserDefaults] boolForKey:IASettingsUpscaleKey] ? NSOnState : NSOffState;
+    self.renameButton.state = [[NSUserDefaults standardUserDefaults] boolForKey:IASettingsRename] ? NSOnState : NSOffState;
     [self.downscaleRadio selectCellAtRow:0
                                   column:[[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"] ? 1 : 0];
 }
 
 - (IBAction)onHelp:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/rickytan/"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/rickytan/RTImageAssets"]];
 }
 
 - (IBAction)onRadio:(id)sender {
@@ -60,6 +63,14 @@ NSString *IASettingsDownscaleKey = @"IASettingsDownscaleKey";
         [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:IASettingsUpscaleKey];
     else
         [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:IASettingsUpscaleKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)onRename:(id)sender {
+    if (self.renameButton.state == NSOnState)
+        [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:IASettingsRename];
+    else
+        [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:IASettingsRename];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

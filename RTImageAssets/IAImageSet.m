@@ -19,26 +19,30 @@ NSString const *IAImageSubtype = @"subtype";
 
 - (NSImage *)resizedImageWithScale:(CGFloat)scale
 {
-    scale /= 2.f;
-    NSSize scaledSize = NSMakeSize(self.size.width * scale, self.size.height * scale);
-    NSLog(@"%@", NSStringFromSize(scaledSize));
-    NSImage *newImage = [[NSImage alloc] initWithSize:scaledSize];
-    [newImage lockFocus];
-    [self drawInRect:NSMakeRect(0, 0, scaledSize.width, scaledSize.height)
-            fromRect:NSZeroRect
-           operation:NSCompositeCopy
-            fraction:1.0
-      respectFlipped:YES
-               hints:@{NSImageHintInterpolation: @(NSImageInterpolationDefault)}];
-    [newImage unlockFocus];
-    return newImage;
-    return [NSImage imageWithSize:scaledSize
-                          flipped:NO
-                   drawingHandler:^BOOL(NSRect dstRect) {
-                       NSLog(@"%@", NSStringFromRect(dstRect));
-                       [self drawInRect:dstRect];
-                       return YES;
-                   }];
+    NSBitmapImageRep *rep = self.representations.firstObject;
+    NSSize pixelSize = NSMakeSize(rep.pixelsWide, rep.pixelsHigh);
+    NSSize scaledSize = NSMakeSize(floorf(pixelSize.width * scale), floorf(pixelSize.height * scale));
+
+    rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+                                                  pixelsWide:scaledSize.width
+                                                  pixelsHigh:scaledSize.height
+                                               bitsPerSample:8
+                                             samplesPerPixel:4
+                                                    hasAlpha:YES
+                                                    isPlanar:NO
+                                              colorSpaceName:rep.colorSpaceName
+                                                 bytesPerRow:0
+                                                bitsPerPixel:0];
+    rep.size = scaledSize;
+
+    [NSGraphicsContext saveGraphicsState];
+    [NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:rep]];
+    [self drawInRect:NSMakeRect(0, 0, scaledSize.width, scaledSize.height)];
+    [NSGraphicsContext restoreGraphicsState];
+
+    return [[NSImage alloc] initWithData:[rep representationUsingType:NSPNGFileType
+                                                           properties:nil]];
+
 }
 
 - (BOOL)saveToFile:(NSString *)filePath withType:(NSBitmapImageFileType)type
@@ -59,7 +63,7 @@ NSString const *IAImageSubtype = @"subtype";
 @end
 
 @interface IAImageSet ()
-@property (nonatomic, strong) NSBundle *bundle;
+@property (nonatomic, copy) NSString *path;
 @property (nonatomic, strong) NSMutableDictionary *contentInfo;
 @property (nonatomic, assign, getter=isChanged) BOOL changed;
 - (void)generate3xIfNeeded;
@@ -79,9 +83,9 @@ NSString const *IAImageSubtype = @"subtype";
 {
     self = [super init];
     if (self) {
-        self.bundle = [NSBundle bundleWithPath:path];
-        NSString *contentFile = [self.bundle pathForResource:@"Contents"
-                                                      ofType:@"json"];
+        self.path = path;
+
+        NSString *contentFile = [self.path stringByAppendingPathComponent:@"Contents.json"];
         NSData *data = [NSData dataWithContentsOfFile:contentFile];
         if (data) {
             NSError *error = nil;
@@ -127,8 +131,7 @@ NSString const *IAImageSubtype = @"subtype";
 
     NSString *final = [NSString stringWithFormat:@"%@%@.png", filename, scaleExt];
     NSInteger count = 0;
-    while ([[NSFileManager defaultManager] fileExistsAtPath:[self.bundle pathForResource:final
-                                                                                  ofType:nil]]) {
+    while ([[NSFileManager defaultManager] fileExistsAtPath:[self.path stringByAppendingPathComponent:final]]) {
         final = [NSString stringWithFormat:@"%@%@~%ld.png", filename, scaleExt, ++count];
     }
     return final;
@@ -148,7 +151,9 @@ NSString const *IAImageSubtype = @"subtype";
 {
     NSArray *images = self.images;
     for (NSUInteger i = 0; i < images.count; ++i) {
-        if ([images[i][IAImageScale] isEqualToString:@"2x"] && [images[i][IAImageFilename] length])
+        if ([images[i][IAImageScale] isEqualToString:@"2x"] &&
+            [images[i][IAImageFilename] length] &&
+            [@[@"iphone", @"universal"] containsObject:images[i][IAImageIdiom]])
             return i;
     }
     return NSNotFound;
@@ -184,12 +189,11 @@ NSString const *IAImageSubtype = @"subtype";
         }
         if (idx != NSNotFound) {
             NSString *imgName = self.images[idx][IAImageFilename];
-            NSImage *img = [[NSImage alloc] initWithData:[NSData dataWithContentsOfFile:[self.bundle pathForResource:imgName
-                                                                                                              ofType:nil]]];
+            NSImage *img = [[NSImage alloc] initWithData:[NSData dataWithContentsOfFile:[self.path stringByAppendingPathComponent:imgName]]];
             NSImage *scaledImage = [img resizedImageWithScale:scale];
             NSString *fileName = [self filenameForImageName:imgName
                                            ofScaleExtension:@""];
-            if ([scaledImage saveToFile:[[self.bundle resourcePath] stringByAppendingPathComponent:fileName]
+            if ([scaledImage saveToFile:[self.path stringByAppendingPathComponent:fileName]
                                withType:NSPNGFileType]) {
                 [self setFilename:fileName
                          forScale:@"1x"];
@@ -207,13 +211,12 @@ NSString const *IAImageSubtype = @"subtype";
     idx = [self get3xImageIndex];
     if (idx != NSNotFound) {
         NSString *imgName = self.images[idx][IAImageFilename];
-        NSImage *img = [[NSImage alloc] initWithData:[NSData dataWithContentsOfFile:[self.bundle pathForResource:imgName
-                                                                                                          ofType:nil]]];
+        NSImage *img = [[NSImage alloc] initWithData:[NSData dataWithContentsOfFile:[self.path stringByAppendingPathComponent:imgName]]];
         CGFloat scale = [[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"] ? 750.f/960 : 640.f/960;
         NSImage *scaledImage = [img resizedImageWithScale:scale];
         NSString *fileName = [self filenameForImageName:imgName
                                        ofScaleExtension:@"@2x"];
-        if ([scaledImage saveToFile:[[self.bundle resourcePath] stringByAppendingPathComponent:fileName]
+        if ([scaledImage saveToFile:[self.path stringByAppendingPathComponent:fileName]
                            withType:NSPNGFileType]) {
             [self setFilename:fileName
                      forScale:@"2x"];
@@ -231,13 +234,12 @@ NSString const *IAImageSubtype = @"subtype";
         idx = [self get2xImageIndex];
         if (idx != NSNotFound) {
             NSString *imgName = self.images[idx][IAImageFilename];
-            NSImage *img = [[NSImage alloc] initWithData:[NSData dataWithContentsOfFile:[self.bundle pathForResource:imgName
-                                                                                                              ofType:nil]]];
+            NSImage *img = [[NSImage alloc] initWithData:[NSData dataWithContentsOfFile:[self.path stringByAppendingPathComponent:imgName]]];
             CGFloat scale = [[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"] ? 960.f/750 : 960.f/640;
             NSImage *scaledImage = [img resizedImageWithScale:scale];
             NSString *fileName = [self filenameForImageName:imgName
                                            ofScaleExtension:@"@3x"];
-            if ([scaledImage saveToFile:[[self.bundle resourcePath] stringByAppendingPathComponent:fileName]
+            if ([scaledImage saveToFile:[self.path stringByAppendingPathComponent:fileName]
                                withType:NSPNGFileType]) {
                 [self setFilename:fileName
                          forScale:@"3x"];
@@ -252,19 +254,80 @@ NSString const *IAImageSubtype = @"subtype";
     [self generate2xIfNeeded];
     [self generate3xIfNeeded];
 
+    [self postProcess];
+}
+
+- (void)postProcess
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:IASettingsRename]) {
+        [self rename];
+    }
+
     if (self.isChanged) {
+        self.changed = NO;
         [[NSJSONSerialization dataWithJSONObject:self.contentInfo
-                                              options:NSJSONWritingPrettyPrinted
-                                                error:NULL] writeToFile:[self.bundle pathForResource:@"Contents"
-                                                                                              ofType:@"json"]
+                                         options:NSJSONWritingPrettyPrinted
+                                           error:NULL]
+         writeToFile:[self.path stringByAppendingPathComponent:@"Contents.json"]
          atomically:NO];
+    }
+}
+
+- (void)rename
+{
+    for (NSMutableDictionary *dic in self.images) {
+        NSString *filename = dic[IAImageFilename];
+        if (filename.length) {
+            NSString *filepath = [self.path stringByAppendingPathComponent:filename];
+            NSString *backfile = [[[self.path stringByAppendingPathComponent:filename.stringByDeletingPathExtension]
+                                   stringByAppendingString:@"__backup~"]
+                                  stringByAppendingPathExtension:filename.pathExtension];
+            if ([[NSFileManager defaultManager] moveItemAtPath:filepath
+                                                        toPath:backfile
+                                                         error:NULL]) {
+                dic[IAImageFilename] = backfile.lastPathComponent;
+                self.changed = YES;
+            }
+        }
+    }
+
+    NSString *renameFilename = self.path.lastPathComponent.stringByDeletingPathExtension;
+    for (NSMutableDictionary *dic in self.images) {
+        NSString *filename = dic[IAImageFilename];
+        NSString *ext = filename.pathExtension;
+        if (!ext.length) {
+            ext = @"png";
+        }
+        if (filename.length) {
+            NSString *filepath = [self.path stringByAppendingPathComponent:filename];
+            filename = renameFilename;
+            if ([dic[IAImageIdiom] isEqualToString:@"ipad"]) {
+                filename = [renameFilename stringByAppendingString:@"~ipad"];
+            }
+
+            if ([dic[IAImageSubtype] isEqualToString:@"retina4"]) {
+                filename = [renameFilename stringByAppendingString:@"-568h"];
+            }
+
+            if (![dic[IAImageScale] isEqualToString:@"1x"]) {
+                filename = [NSString stringWithFormat:@"%@@%@", filename, dic[IAImageScale]];
+            }
+            filename = [filename stringByAppendingPathExtension:ext];
+            NSString *newPath = [self.path stringByAppendingPathComponent:filename];
+            if ([[NSFileManager defaultManager] moveItemAtPath:filepath
+                                                        toPath:newPath
+                                                         error:NULL]) {
+                dic[IAImageFilename] = filename;
+                self.changed = YES;
+            }
+        }
     }
 }
 
 @end
 
 @interface IAImageAssets ()
-@property (nonatomic, strong) NSBundle *bundle;
+@property (nonatomic, copy) NSString *path;
 @property (nonatomic, strong) NSArray *imageSets;
 @end
 
@@ -279,8 +342,7 @@ NSString const *IAImageSubtype = @"subtype";
 {
     self = [super init];
     if (self) {
-        _bundle = [NSBundle bundleWithPath:path];
-
+        self.path = path;
         NSError *error = nil;
         NSArray *items = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
                                                                              error:&error];
@@ -292,8 +354,7 @@ NSString const *IAImageSubtype = @"subtype";
             items = [items filteredArrayUsingPredicate:filter];
             NSMutableArray *images = [NSMutableArray arrayWithCapacity:items.count];
             for (NSString *p in items) {
-                IAImageSet *imageSet = [IAImageSet imageSetWithPath:[self.bundle pathForResource:p
-                                                                                          ofType:nil]];
+                IAImageSet *imageSet = [IAImageSet imageSetWithPath:[self.path stringByAppendingPathComponent:p]];
                 [images addObject:imageSet];
             }
             self.imageSets = [NSArray arrayWithArray:images];

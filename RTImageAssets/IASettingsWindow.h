@@ -11,6 +11,7 @@
 extern NSString *IASettingsGenerateNonRetinaKey;
 extern NSString *IASettingsUpscaleKey;
 extern NSString *IASettingsDownscaleKey;
+extern NSString *IASettingsRename;
 
 @interface IASettingsWindow : NSWindowController
 

@@ -8,6 +8,8 @@
 
 #import <AppKit/AppKit.h>
 
+#define LocalizedString(key)    [[RTImageAssets sharedPlugin].bundle localizedStringForKey:(key) value:(key) table:nil]
+
 @interface RTImageAssets : NSObject
 
 + (instancetype)sharedPlugin;

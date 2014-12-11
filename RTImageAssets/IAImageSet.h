@@ -17,7 +17,6 @@ extern NSString const *IAImageSubtype;
 
 @interface IAImageSet : NSObject
 @property (nonatomic, readonly) NSArray *images;
-@property (nonatomic, readonly) NSBundle *bundle;
 
 + (instancetype)imageSetWithPath:(NSString *)path;
 - (id)initWithPath:(NSString *)path;
@@ -25,7 +24,6 @@ extern NSString const *IAImageSubtype;
 @end
 
 @interface IAImageAssets : NSObject
-@property (nonatomic, readonly) NSBundle *bundle;
 @property (nonatomic, readonly) NSArray *imageSets;
 + (instancetype)assetsWithPath:(NSString *)path;
 - (id)initWithPath:(NSString *)path;

@@ -6,3 +6,7 @@
   Copyright (c) 2014年 rickytan. All rights reserved.
 */
 "Generate" = "Generate Missing Assets";
+"Settings" = "Settings";
+"Processing" = "Processing";
+"OK" = "OK";
+"Please Wait" = "Please wait until process finished";

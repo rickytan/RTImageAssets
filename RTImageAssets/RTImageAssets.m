@@ -43,10 +43,11 @@ static RTImageAssets *sharedPlugin;
     if (self = [super init]) {
         // reference to plugin's bundle, for resource access
         self.bundle = plugin;
-        
+
         // Create menu items, initialize UI, etc.
 
         // Sample Menu Item:
+
         NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"File"];
         if (menuItem) {
             [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
@@ -54,29 +55,26 @@ static RTImageAssets *sharedPlugin;
                                                                         action:nil
                                                                  keyEquivalent:@""];
             imageAssetsItem.submenu = [[NSMenu alloc] init];
-            NSMenuItem *generateItem = [[imageAssetsItem submenu] addItemWithTitle:NSLocalizedString(@"Generate", nil)
+            NSMenuItem *generateItem = [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Generate"
+                                                                                                                value:nil
+                                                                                                                table:nil]
                                                                             action:@selector(_generateAssets:)
                                                                      keyEquivalent:@"g"];
             generateItem.keyEquivalentModifierMask = NSCommandKeyMask | NSShiftKeyMask;
             generateItem.target = self;
-            [[imageAssetsItem submenu] addItemWithTitle:@"Settings"
+            [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Settings"
+                                                                                     value:nil
+                                                                                     table:nil]
                                                  action:@selector(_settings:)
                                           keyEquivalent:@""].target = self;
         }
 
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{IASettingsDownscaleKey: @"iphone5",
                                                                   IASettingsUpscaleKey: @NO,
-                                                                  IASettingsGenerateNonRetinaKey: @NO}];
+                                                                  IASettingsGenerateNonRetinaKey: @NO,
+                                                                  IASettingsRename: @YES}];
     }
     return self;
-}
-
-// Sample Action, for menu item:
-- (void)doMenuAction
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Hello, World"];
-    [alert runModal];
 }
 
 - (void)dealloc
@@ -84,6 +82,8 @@ static RTImageAssets *sharedPlugin;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [_queue waitUntilAllOperationsAreFinished];
+    _queue = nil;
+    _settingsWindow = nil;
 }
 
 #pragma mark - Actions
@@ -129,11 +129,11 @@ static RTImageAssets *sharedPlugin;
 - (void)_settings:(id)sender
 {
     if (_queue.operationCount) {
-        NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Processing", nil)
-                                          defaultButton:NSLocalizedString(@"OK", nil)
-                                        alternateButton:nil
-                                            otherButton:nil
-                             informativeTextWithFormat:NSLocalizedString(@"Please Wait", nil)];
+        NSAlert *alert = [NSAlert alertWithMessageText:LocalizedString(@"Processing")
+                                         defaultButton:LocalizedString(@"OK")
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@"%@", LocalizedString(@"Please Wait")];
         [alert runModal];
     }
     else {
