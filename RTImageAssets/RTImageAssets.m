@@ -59,8 +59,8 @@ static RTImageAssets *sharedPlugin;
                                                                                                                 value:nil
                                                                                                                 table:nil]
                                                                             action:@selector(_generateAssets:)
-                                                                     keyEquivalent:@"g"];
-            generateItem.keyEquivalentModifierMask = NSCommandKeyMask | NSShiftKeyMask;
+                                                                     keyEquivalent:@"a"];
+            generateItem.keyEquivalentModifierMask = NSControlKeyMask | NSShiftKeyMask;
             generateItem.target = self;
             [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Settings"
                                                                                      value:nil
