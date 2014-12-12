@@ -1,3 +1,4 @@
 language: objective-c
 xcode_project: RTImageAssets.xcodeproj # path to your xcodeproj folder
 xcode_scheme: RTImageAssets
+script: xctool -project RTImageAssets.xcodeproj -scheme RTImageAssets
