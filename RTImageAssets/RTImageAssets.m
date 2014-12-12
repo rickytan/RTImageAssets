@@ -14,10 +14,10 @@
 static RTImageAssets *sharedPlugin;
 
 @interface RTImageAssets()
-
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
 @property (nonatomic, strong) IASettingsWindow *settingsWindow;
 @property (nonatomic, strong) NSOperationQueue *queue;
+@property (nonatomic, strong) NSMenuItem *menuItem;
 @end
 
 @implementation RTImageAssets
@@ -46,14 +46,14 @@ static RTImageAssets *sharedPlugin;
 
         // Create menu items, initialize UI, etc.
 
-        // Sample Menu Item:
-
         NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"File"];
         if (menuItem) {
             [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
+
             NSMenuItem *imageAssetsItem = [[menuItem submenu] addItemWithTitle:@"ImageAssets"
                                                                         action:nil
                                                                  keyEquivalent:@""];
+            imageAssetsItem.enabled = NO;
             imageAssetsItem.submenu = [[NSMenu alloc] init];
             NSMenuItem *generateItem = [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Generate"
                                                                                                                 value:nil
@@ -67,7 +67,18 @@ static RTImageAssets *sharedPlugin;
                                                                                      table:nil]
                                                  action:@selector(_settings:)
                                           keyEquivalent:@""].target = self;
+
+            self.menuItem = imageAssetsItem;
         }
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onProjectOpen:)
+                                                     name:@"PBXProjectDidOpenNotification"
+                                                   object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onProjectClose:)
+                                                     name:@"PBXProjectWillCloseNotification"
+                                                   object:nil];
 
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{IASettingsDownscaleKey: @"iphone5",
                                                                   IASettingsUpscaleKey: @NO,
@@ -87,27 +98,6 @@ static RTImageAssets *sharedPlugin;
 }
 
 #pragma mark - Actions
-
-- (NSArray *)assetsBundlesInPath:(NSString *)path
-{
-    NSMutableArray *bundles = [NSMutableArray array];
-
-    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtPath:path];
-    NSString *filePath = nil;
-    while (filePath = [enumerator nextObject]) {
-        if ([@"xcassets" isEqualToString:filePath.pathExtension]) {
-            NSString *fullPath = [path stringByAppendingPathComponent:filePath];
-            NSError *error = nil;
-            NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:fullPath
-                                                                                  error:&error];
-            if ([attr[NSFileType] isEqualTo:NSFileTypeDirectory]) {
-                [bundles addObject:fullPath];
-            }
-        }
-    }
-
-    return [NSArray arrayWithArray:bundles];
-}
 
 - (void)_generateAssets:(id)sender
 {
@@ -142,6 +132,37 @@ static RTImageAssets *sharedPlugin;
 }
 
 #pragma mark - Methods
+
+- (void)onProjectOpen:(NSNotification *)notification
+{
+    self.menuItem.enabled = YES;
+}
+
+- (void)onProjectClose:(NSNotification *)notification
+{
+    self.menuItem.enabled = NO;
+}
+
+- (NSArray *)assetsBundlesInPath:(NSString *)path
+{
+    NSMutableArray *bundles = [NSMutableArray array];
+
+    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtPath:path];
+    NSString *filePath = nil;
+    while (filePath = [enumerator nextObject]) {
+        if ([@"xcassets" isEqualToString:filePath.pathExtension]) {
+            NSString *fullPath = [path stringByAppendingPathComponent:filePath];
+            NSError *error = nil;
+            NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:fullPath
+                                                                                  error:&error];
+            if ([attr[NSFileType] isEqualTo:NSFileTypeDirectory]) {
+                [bundles addObject:fullPath];
+            }
+        }
+    }
+
+    return [NSArray arrayWithArray:bundles];
+}
 
 - (IASettingsWindow *)settingsWindow
 {
