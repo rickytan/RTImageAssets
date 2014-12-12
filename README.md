@@ -1,6 +1,5 @@
-RTImageAssets
+RTImageAssets [![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)](https://travis-ci.org/rickytan/RTImageAssets)
 =============
-![Travis Build](https://api.travis-ci.org/rickytan/RTImageAssets.svg)
 
 简介
 ---
