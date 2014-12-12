@@ -1,5 +1,7 @@
 RTImageAssets
 =============
+![Travis Build](https://api.travis-ci.org/rickytan/RTImageAssets.svg)
+
 简介
 ---
 本项目是一个 **Xcode** 插件，用来生成 @3x 的图片资源对应的 @2x 和 @1x 版本，只要拖拽高清图到 @3x 的位置上，然后按 `Ctrl+Shift+A` 即可自动生成两张低清的补全空位。当然你也可以从 @2x 的图生成 @3x 版本，如果你对图片质量要求不高的话。
