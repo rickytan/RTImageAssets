@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Rtimageassets by rickytan</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Rtimageassets</h1>
+        <p class="header">A Xcode plugin to automatically generate @2x, @1x image from @3x image for you, or upscale to @3x from @2x</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/rickytan/RTImageAssets/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/rickytan/RTImageAssets/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/rickytan/RTImageAssets">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/rickytan">rickytan</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a id="rtimageassets" class="anchor" href="#rtimageassets" aria-hidden="true"><span class="octicon octicon-link"></span></a>RTImageAssets</h1>
+
+<h2>
+<a id="简介" class="anchor" href="#%E7%AE%80%E4%BB%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>简介</h2>
+
+<p>本项目是一个 <strong>Xcode</strong> 插件，用来生成 <a href="https://github.com/3x" class="user-mention">@3x</a> 的图片资源对应的 <a href="https://github.com/2x" class="user-mention">@2x</a> 和 <a href="https://github.com/1x" class="user-mention">@1x</a> 版本，只要拖拽高清图到 <a href="https://github.com/3x" class="user-mention">@3x</a> 的位置上，然后按 <code>Ctrl+Shift+A</code> 即可自动生成两张低清的补全空位。当然你也可以从 <a href="https://github.com/2x" class="user-mention">@2x</a> 的图生成 <a href="https://github.com/3x" class="user-mention">@3x</a> 版本，如果你对图片质量要求不高的话。</p>
+
+<h2>
+<a id="特性" class="anchor" href="#%E7%89%B9%E6%80%A7" aria-hidden="true"><span class="octicon octicon-link"></span></a>特性</h2>
+
+<ul>
+<li>只会填补空位，如果你已经设置好了自己的 <a href="https://github.com/2x" class="user-mention">@2x</a> 图，则不会生成；</li>
+<li>自动重命名，保持项目干净（把 N.imageset 下的图片名字改为 <code>N.png</code> <code>N@2x.png</code> <code>N@3x.png</code> 等）；</li>
+<li>
+<p>使用简单，不用再麻烦美术同学缩放了；</p>
+
+<p><strong><em>注意：</em></strong>本插件从 <a href="https://github.com/3x" class="user-mention">@3x</a> 到 <a href="https://github.com/2x" class="user-mention">@2x</a> 的缩放保证图片在屏幕上显示的物理尺寸一样，而不是与屏幕比例一样，缩放系数是 <strong>1.5</strong>，而不是 <code>1242 / 640 = 1.94</code>。</p>
+</li>
+</ul>
+
+<p><img src="./ScreenCap/usage.gif" alt="Usage"></p>
+
+<h2>
+<a id="设置" class="anchor" href="#%E8%AE%BE%E7%BD%AE" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置</h2>
+
+<p><img src="./ScreenCap/p.png" alt="Setting"></p>
+
+<h2>
+<a id="安装" class="anchor" href="#%E5%AE%89%E8%A3%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h2>
+
+<p>下载本项目，在 <code>Xcode</code> 中打开，构建、重启即可。</p>
+
+<h2>
+<a id="问题" class="anchor" href="#%E9%97%AE%E9%A2%98" aria-hidden="true"><span class="octicon octicon-link"></span></a>问题</h2>
+
+<p>此插件还没有经过严格测试，如果你有什么问题，请提出：<a href="https://github.com/rickytan/RTImageAssets/issues">https://github.com/rickytan/RTImageAssets/issues</a></p>
+
+<h2>
+<a id="协议" class="anchor" href="#%E5%8D%8F%E8%AE%AE" aria-hidden="true"><span class="octicon octicon-link"></span></a>协议</h2>
+
+<p><strong>MIT</strong></p>
+
+<h2>
+<a id="brief" class="anchor" href="#brief" aria-hidden="true"><span class="octicon octicon-link"></span></a>Brief</h2>
+
+<p>A Xcode plugin to automatically generate <a href="https://github.com/2x" class="user-mention">@2x</a>, <a href="https://github.com/1x" class="user-mention">@1x</a> image from <a href="https://github.com/3x" class="user-mention">@3x</a> image for you, or upscale to <a href="https://github.com/3x" class="user-mention">@3x</a> from <a href="https://github.com/2x" class="user-mention">@2x</a>. As easy as you press <code>Ctrl+Shift+A</code>, and <strong>DONE</strong>!</p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Only generate those missing assets, if you have already set your own <a href="https://github.com/2x" class="user-mention">@2x</a> image, it does nothing</li>
+<li>Automaticaly rename those image files under <code>N.imageset</code> to <code>N.png</code>, <code>N@2x.png</code>, <code>N@3x.png</code>
+</li>
+<li>Easy to use, don't need ask for your designer's help any more!</li>
+</ul>
+
+<p><img src="./ScreenCap/usage.gif" alt="Usage"></p>
+
+<h2>
+<a id="settings" class="anchor" href="#settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Settings</h2>
+
+<p><img src="./ScreenCap/p.png" alt="Setting"></p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>Clone this Repo, build it in <code>Xcode</code>, and restart your <code>Xcode</code>.</p>
+
+<h2>
+<a id="issues" class="anchor" href="#issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Issues</h2>
+
+<p>This plugin is <strong>NOT</strong> fully tested, if you have any problems, please let me know: <a href="https://github.com/rickytan/RTImageAssets/issues">https://github.com/rickytan/RTImageAssets/issues</a></p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p><strong>MIT</strong></p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
