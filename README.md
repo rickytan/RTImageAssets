@@ -1,4 +1,4 @@
-RTImageAssets [![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)](https://travis-ci.org/rickytan/RTImageAssets)
+RTImageAssets [![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)](https://travis-ci.org/rickytan/RTImageAssets) [![License](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](./LICENSE)
 =============
 
 简介
