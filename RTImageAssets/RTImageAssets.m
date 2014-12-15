@@ -70,6 +70,12 @@ static RTImageAssets *sharedPlugin;
 
             self.menuItem = imageAssetsItem;
         }
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onProjectChanged:)
+                                                     name:@"PBXProjectDidChangeNotification"
+                                                   object:nil];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onProjectOpen:)
                                                      name:@"PBXProjectDidOpenNotification"
@@ -141,6 +147,11 @@ static RTImageAssets *sharedPlugin;
 - (void)onProjectClose:(NSNotification *)notification
 {
     self.menuItem.enabled = NO;
+}
+
+- (void)onProjectChanged:(NSNotification *)notification
+{
+    self.menuItem.enabled = YES;
 }
 
 - (NSArray *)assetsBundlesInPath:(NSString *)path
