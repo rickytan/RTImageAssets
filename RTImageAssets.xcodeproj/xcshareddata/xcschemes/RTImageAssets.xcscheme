@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "890A4B3E171F031300AFE577"
+               BlueprintIdentifier = "9C1218FA1A385DA6002EA7C2"
                BuildableName = "RTImageAssets.xcplugin"
                BlueprintName = "RTImageAssets"
                ReferencedContainer = "container:RTImageAssets.xcodeproj">
@@ -61,7 +61,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "890A4B3E171F031300AFE577"
+            BlueprintIdentifier = "9C1218FA1A385DA6002EA7C2"
             BuildableName = "RTImageAssets.xcplugin"
             BlueprintName = "RTImageAssets"
             ReferencedContainer = "container:RTImageAssets.xcodeproj">
