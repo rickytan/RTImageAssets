@@ -193,6 +193,12 @@ static RTImageAssets *sharedPlugin;
 
             self.menuItem = imageAssetsItem;
         }
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onProjectChanged:)
+                                                     name:@"PBXProjectDidChangeNotification"
+                                                   object:nil];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onNotif:)
                                                      name:nil
