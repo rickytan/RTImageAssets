@@ -57,3 +57,36 @@
 @property(readonly) NSString *representingTitle;
 @property(readonly) DVTFilePath *representingFilePath;
 @end
+
+@interface DVTLayoutView_ML : NSView
+@end
+
+@protocol IBViewDragDelegate <NSObject>
+- (BOOL)view:(id)arg1 performDragOperation:(id)arg2;
+- (BOOL)view:(id)arg1 prepareForDragOperation:(id)arg2;
+- (unsigned long long)view:(id)arg1 draggingEntered:(id)arg2;
+- (id)dragTypesForView:(id)arg1;
+
+@optional
+- (void)view:(id)arg1 draggingEnded:(id)arg2;
+- (void)view:(id)arg1 draggingExited:(id)arg2;
+- (void)view:(id)arg1 concludeDragOperation:(id)arg2;
+- (unsigned long long)view:(id)arg1 draggingUpdated:(id)arg2;
+@end
+
+@protocol IBICMultipartImageViewDelegate <IBViewDragDelegate>
+- (id)multipartImageView:(id)arg1 imageForImageRepIdentifier:(id)arg2;
+- (id)multipartImageView:(id)arg1 titleForImageRepIdentifier:(id)arg2;
+- (void)multipartImageViewWillLayout:(id)arg1;
+- (BOOL)multipartImageView:(id)arg1 interceptMouseUp:(id)arg2;
+- (BOOL)multipartImageView:(id)arg1 interceptMouseDragged:(id)arg2 withOriginalMouseDown:(id)arg3;
+- (BOOL)multipartImageView:(id)arg1 interceptMouseDown:(id)arg2;
+- (void)multipartImageView:(id)arg1 userDidEditTitle:(id)arg2;
+- (void)multipartImageView:(id)arg1 performDelete:(id)arg2;
+@end
+
+@interface IBICMultipartImageView : DVTLayoutView_ML
+@property(nonatomic) __weak id <IBICMultipartImageViewDelegate> delegate;
+- (id)effectiveOuterBorderColor;
+- (id)effectiveTitleColor;
+@end
