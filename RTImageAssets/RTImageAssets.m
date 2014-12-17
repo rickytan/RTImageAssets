@@ -199,8 +199,7 @@ static RTImageAssets *sharedPlugin;
 - (IAAppiconWindow *)iconWindow
 {
     if (!_iconWindow) {
-        _iconWindow = [[IAAppiconWindow alloc] initWithWindowNibName:NSStringFromClass([IAAppiconWindow class])
-                                                               owner:self];
+        _iconWindow = [[IAAppiconWindow alloc] initWithWindowNibName:NSStringFromClass([IAAppiconWindow class])];
         _iconWindow.delegate = self;
     }
     return _iconWindow;

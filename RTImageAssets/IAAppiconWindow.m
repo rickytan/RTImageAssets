@@ -23,11 +23,24 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
+- (IAIconGenerationDeviceType)deviceType
+{
+    return [self.deviceTypeButton.menu indexOfItem:self.deviceTypeButton.selectedItem];
+}
 
+- (IAIconGenerationOSType)OSType
+{
+    return [self.osTypeButton.menu indexOfItem:self.osTypeButton.selectedItem];
+}
 
 #pragma mark - Actions
 
 - (IBAction)onGenerate:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(appIconWindow:generateIconsWithImage:)])
+        [self.delegate appIconWindow:self
+              generateIconsWithImage:self.appIconImageView.image];
+
 }
+
 
 @end
