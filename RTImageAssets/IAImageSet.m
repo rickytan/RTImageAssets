@@ -368,24 +368,12 @@ NSString const *IAImageSubtype = @"subtype";
 - (NSArray *)allFilesInDirectoryAtPath:(NSString *)path {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *bundleURL = [NSURL URLWithString:path];
-    NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:bundleURL
-                                          includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey]
-                                                             options:NSDirectoryEnumerationSkipsHiddenFiles
-                                                        errorHandler:^BOOL(NSURL *url, NSError *error)
-    {
-        if (error) {
-            NSLog(@"[Error] %@ (%@)", error, url);
-            return NO;
-        }
-        
+    NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:bundleURL includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *error) {
         return YES;
     }];
     
     NSMutableArray *mutableFileURLs = [NSMutableArray array];
     for (NSURL *fileURL in enumerator) {
-        NSString *filename;
-        [fileURL getResourceValue:&filename forKey:NSURLNameKey error:nil];
-        
         NSNumber *isDirectory;
         [fileURL getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:nil];
         
