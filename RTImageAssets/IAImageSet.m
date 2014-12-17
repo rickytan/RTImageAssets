@@ -343,23 +343,17 @@ NSString const *IAImageSubtype = @"subtype";
     self = [super init];
     if (self) {
         self.path = path;
-        NSError *error = nil;
-        
+
         NSArray *items = [self allFilesInDirectoryAtPath:path];
-        
-        if (error) {
-            NSLog(@"Fail to get contents in: %@", path);
+
+        NSPredicate *filter = [NSPredicate predicateWithFormat:@"pathExtension = 'imageset'"];
+        items = [items filteredArrayUsingPredicate:filter];
+        NSMutableArray *images = [NSMutableArray arrayWithCapacity:items.count];
+        for (NSURL *p in items) {
+            IAImageSet *imageSet = [IAImageSet imageSetWithPath:p.path];
+            [images addObject:imageSet];
         }
-        else {
-            NSPredicate *filter = [NSPredicate predicateWithFormat:@"pathExtension = 'imageset'"];
-            items = [items filteredArrayUsingPredicate:filter];
-            NSMutableArray *images = [NSMutableArray arrayWithCapacity:items.count];
-            for (NSURL *p in items) {
-                IAImageSet *imageSet = [IAImageSet imageSetWithPath:p.path];
-                [images addObject:imageSet];
-            }
-            self.imageSets = [NSArray arrayWithArray:images];
-        }
+        self.imageSets = [NSArray arrayWithArray:images];
     }
 
     return self;
@@ -371,12 +365,12 @@ NSString const *IAImageSubtype = @"subtype";
     NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:bundleURL includingPropertiesForKeys:@[NSURLIsDirectoryKey] options:NSDirectoryEnumerationSkipsHiddenFiles errorHandler:^BOOL(NSURL *url, NSError *error) {
         return YES;
     }];
-    
+
     NSMutableArray *mutableFileURLs = [NSMutableArray array];
     for (NSURL *fileURL in enumerator) {
         NSNumber *isDirectory;
         [fileURL getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:nil];
-        
+
         if ([isDirectory boolValue]) {
             [mutableFileURLs addObject:fileURL];
         }
