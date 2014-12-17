@@ -8,14 +8,16 @@
 
 #import "RTImageAssets.h"
 #import "IASettingsWindow.h"
+#import "IAAppiconWindow.h"
 #import "IAWorkspace.h"
 #import "IAImageSet.h"
 
 static RTImageAssets *sharedPlugin;
 
-@interface RTImageAssets()
+@interface RTImageAssets() <IAAppiconWindowDelegate>
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
 @property (nonatomic, strong) IASettingsWindow *settingsWindow;
+@property (nonatomic, strong) IAAppiconWindow *iconWindow;
 @property (nonatomic, strong) NSOperationQueue *queue;
 @property (nonatomic, strong) NSMenuItem *menuItem;
 @end
@@ -62,6 +64,12 @@ static RTImageAssets *sharedPlugin;
                                                                      keyEquivalent:@"a"];
             generateItem.keyEquivalentModifierMask = NSControlKeyMask | NSShiftKeyMask;
             generateItem.target = self;
+
+            [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Appicons"
+                                                                                     value:nil
+                                                                                     table:nil]
+                                                 action:@selector(_dropAppicon:)
+                                          keyEquivalent:@""].target = self;
             [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Settings"
                                                                                      value:nil
                                                                                      table:nil]
@@ -120,6 +128,11 @@ static RTImageAssets *sharedPlugin;
     else {
 
     }
+}
+
+- (void)_dropAppicon:(id)sender
+{
+    [self.iconWindow showWindow:sender];
 }
 
 - (void)_settings:(id)sender
@@ -183,6 +196,16 @@ static RTImageAssets *sharedPlugin;
     return _settingsWindow;
 }
 
+- (IAAppiconWindow *)iconWindow
+{
+    if (!_iconWindow) {
+        _iconWindow = [[IAAppiconWindow alloc] initWithWindowNibName:NSStringFromClass([IAAppiconWindow class])
+                                                               owner:self];
+        _iconWindow.delegate = self;
+    }
+    return _iconWindow;
+}
+
 - (NSOperationQueue *)queue
 {
     if (!_queue) {
@@ -191,6 +214,14 @@ static RTImageAssets *sharedPlugin;
         _queue.maxConcurrentOperationCount = 5;
     }
     return _queue;
+}
+
+#pragma mark - IAAppicon delegate
+
+- (void)appIconWindow:(IAAppiconWindow *)window
+generateIconsWithImage:(NSImage *)image
+{
+
 }
 
 @end

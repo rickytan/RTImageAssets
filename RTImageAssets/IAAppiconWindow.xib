@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="IAAppiconWindow">
+            <connections>
+                <outlet property="appIconImageView" destination="Qyw-Zz-Lgy" id="fVm-Cb-PH9"/>
+                <outlet property="deviceTypeButton" destination="GgS-5e-ofe" id="rpv-gk-FDg"/>
+                <outlet property="osTypeButton" destination="gji-NG-0sQ" id="MZ4-nA-4gV"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="App Icon" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="552" height="604"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="552" height="604"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gji-NG-0sQ">
+                        <rect key="frame" x="18" y="560" width="76" height="26"/>
+                        <popUpButtonCell key="cell" type="push" title="All iOS" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="2xA-FJ-fg8" id="m8h-PP-kK1">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="jBS-cq-a0F">
+                                <items>
+                                    <menuItem title="All iOS" state="on" id="2xA-FJ-fg8"/>
+                                    <menuItem title="iOS7+" id="Fbz-co-3cO"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GgS-5e-ofe">
+                        <rect key="frame" x="97" y="560" width="92" height="26"/>
+                        <popUpButtonCell key="cell" type="push" title="Universal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="KuP-iK-k51" id="9zG-Kk-xxa">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="s6e-e2-2c1">
+                                <items>
+                                    <menuItem title="Universal" state="on" id="KuP-iK-k51"/>
+                                    <menuItem title="iPhone" id="8yU-kL-lsb">
+                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                    </menuItem>
+                                    <menuItem title="iPad" id="0ev-0S-L4j"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pMr-OZ-zQf">
+                        <rect key="frame" x="441" y="556" width="97" height="32"/>
+                        <buttonCell key="cell" type="push" title="Generate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bEo-AR-2wt">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="onGenerate:" target="-2" id="o22-dj-g25"/>
+                        </connections>
+                    </button>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qyw-Zz-Lgy">
+                        <rect key="frame" x="20" y="20" width="512" height="512"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="512" id="Eaf-SK-Wzc"/>
+                            <constraint firstAttribute="height" constant="512" id="oxq-pD-gFz"/>
+                        </constraints>
+                        <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyDown" image="Appicon" id="tYb-Tw-Wg3"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="gji-NG-0sQ" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="4Lr-R7-68n"/>
+                    <constraint firstItem="gji-NG-0sQ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="Cc0-CR-Ohn"/>
+                    <constraint firstItem="GgS-5e-ofe" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="SsB-nM-1Qw"/>
+                    <constraint firstItem="pMr-OZ-zQf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="bB0-hp-apI"/>
+                    <constraint firstAttribute="bottom" secondItem="Qyw-Zz-Lgy" secondAttribute="bottom" constant="20" id="e8P-6Y-7Cl"/>
+                    <constraint firstItem="GgS-5e-ofe" firstAttribute="leading" secondItem="gji-NG-0sQ" secondAttribute="trailing" constant="8" id="jz9-6l-9qP"/>
+                    <constraint firstAttribute="centerX" secondItem="Qyw-Zz-Lgy" secondAttribute="centerX" id="mfY-RX-t0c"/>
+                    <constraint firstAttribute="trailing" secondItem="pMr-OZ-zQf" secondAttribute="trailing" constant="20" id="q2O-K8-l7g"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="547" y="351"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="Appicon" width="512" height="512"/>
+    </resources>
+</document>
