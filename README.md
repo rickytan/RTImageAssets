@@ -21,7 +21,12 @@ RTImageAssets [![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)
 
 安装
 ---
+
+### 编译安装
 下载本项目，在 `Xcode` 中打开，构建、重启即可。
+
+### `Plugin Manager` 安装
+安装 [插件管理](http://alcatraz.io/) 插件，搜索：`RTImageAssets`。
 
 问题
 ---
@@ -49,7 +54,12 @@ Settings
 
 Install
 ---
+
+### From Source
 Clone this Repo, build it in `Xcode`, and restart your `Xcode`.
+
+### From Plugin Manager
+Install [Package Manager](http://alcatraz.io/) for **Xcode**, search: `RTImageAssets`.
 
 Issues
 ---
