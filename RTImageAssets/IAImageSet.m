@@ -344,8 +344,9 @@ NSString const *IAImageSubtype = @"subtype";
     if (self) {
         self.path = path;
         NSError *error = nil;
-        NSArray *items = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path
-                                                                             error:&error];
+        
+        NSArray *items = [self allFilesInDirectoryAtPath:path];
+        
         if (error) {
             NSLog(@"Fail to get contents in: %@", path);
         }
@@ -353,8 +354,8 @@ NSString const *IAImageSubtype = @"subtype";
             NSPredicate *filter = [NSPredicate predicateWithFormat:@"pathExtension = 'imageset'"];
             items = [items filteredArrayUsingPredicate:filter];
             NSMutableArray *images = [NSMutableArray arrayWithCapacity:items.count];
-            for (NSString *p in items) {
-                IAImageSet *imageSet = [IAImageSet imageSetWithPath:[self.path stringByAppendingPathComponent:p]];
+            for (NSURL *p in items) {
+                IAImageSet *imageSet = [IAImageSet imageSetWithPath:p.path];
                 [images addObject:imageSet];
             }
             self.imageSets = [NSArray arrayWithArray:images];
@@ -362,6 +363,37 @@ NSString const *IAImageSubtype = @"subtype";
     }
 
     return self;
+}
+
+- (NSArray *)allFilesInDirectoryAtPath:(NSString *)path {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *bundleURL = [NSURL URLWithString:path];
+    NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:bundleURL
+                                          includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey]
+                                                             options:NSDirectoryEnumerationSkipsHiddenFiles
+                                                        errorHandler:^BOOL(NSURL *url, NSError *error)
+    {
+        if (error) {
+            NSLog(@"[Error] %@ (%@)", error, url);
+            return NO;
+        }
+        
+        return YES;
+    }];
+    
+    NSMutableArray *mutableFileURLs = [NSMutableArray array];
+    for (NSURL *fileURL in enumerator) {
+        NSString *filename;
+        [fileURL getResourceValue:&filename forKey:NSURLNameKey error:nil];
+        
+        NSNumber *isDirectory;
+        [fileURL getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:nil];
+        
+        if ([isDirectory boolValue]) {
+            [mutableFileURLs addObject:fileURL];
+        }
+    }
+    return [mutableFileURLs copy];
 }
 
 - (void)addToProccesingQueue:(NSOperationQueue *)queue
