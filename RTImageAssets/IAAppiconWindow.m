@@ -19,7 +19,7 @@
     self.layer.cornerRadius = 120.f;
     self.layer.backgroundColor = [NSColor redColor].CGColor;
 
-    [self registerForDraggedTypes:@[NSTIFFPboardType, NSFilenamesPboardType]];
+    [self registerForDraggedTypes:[NSImage imagePasteboardTypes]];
 }
 
 @end
