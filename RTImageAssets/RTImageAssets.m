@@ -65,11 +65,14 @@ static RTImageAssets *sharedPlugin;
             generateItem.keyEquivalentModifierMask = NSControlKeyMask | NSShiftKeyMask;
             generateItem.target = self;
 
-            [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Appicons"
-                                                                                     value:nil
-                                                                                     table:nil]
-                                                 action:@selector(_dropAppicon:)
-                                          keyEquivalent:@""].target = self;
+            NSMenuItem *appiconItem = [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Appicons"
+                                                                                                               value:nil
+                                                                                                               table:nil]
+                                                                           action:@selector(_dropAppicon:)
+                                                                    keyEquivalent:@"a"];
+            appiconItem.target = self;
+            appiconItem.keyEquivalentModifierMask = NSControlKeyMask | NSShiftKeyMask | NSAlternateKeyMask;
+
             [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Settings"
                                                                                      value:nil
                                                                                      table:nil]

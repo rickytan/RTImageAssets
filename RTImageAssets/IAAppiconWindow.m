@@ -7,6 +7,22 @@
 //
 
 #import "IAAppiconWindow.h"
+#import <CoreGraphics/CoreGraphics.h>
+
+@interface IAImageViewInternal : NSImageView
+@end
+
+@implementation IAImageViewInternal
+
+- (void)awakeFromNib
+{
+    self.layer.cornerRadius = 120.f;
+    self.layer.backgroundColor = [NSColor redColor].CGColor;
+
+    [self registerForDraggedTypes:@[NSTIFFPboardType, NSFilenamesPboardType]];
+}
+
+@end
 
 @interface IAAppiconWindow ()
 @property (weak) IBOutlet NSPopUpButton *osTypeButton;
@@ -21,6 +37,7 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+
 }
 
 - (IAIconGenerationDeviceType)deviceType
@@ -31,6 +48,12 @@
 - (IAIconGenerationOSType)OSType
 {
     return [self.osTypeButton.menu indexOfItem:self.osTypeButton.selectedItem];
+}
+
+- (void)dismissController:(id)sender
+{
+    self.appIconImageView.image = [NSImage imageNamed:@"Appicon"];
+    [super dismissController:sender];
 }
 
 #pragma mark - Actions

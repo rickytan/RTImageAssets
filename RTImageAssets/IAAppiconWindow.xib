@@ -63,13 +63,13 @@
                             <action selector="onGenerate:" target="-2" id="o22-dj-g25"/>
                         </connections>
                     </button>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qyw-Zz-Lgy">
-                        <rect key="frame" x="20" y="20" width="512" height="512"/>
+                    <imageView toolTip="Drop your 1024x1024 Icon here" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qyw-Zz-Lgy" customClass="IAImageViewInternal">
+                        <rect key="frame" x="12" y="20" width="528" height="528"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="512" id="Eaf-SK-Wzc"/>
-                            <constraint firstAttribute="height" constant="512" id="oxq-pD-gFz"/>
+                            <constraint firstAttribute="width" constant="528" id="Eaf-SK-Wzc"/>
+                            <constraint firstAttribute="height" constant="528" id="oxq-pD-gFz"/>
                         </constraints>
-                        <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyDown" image="Appicon" id="tYb-Tw-Wg3"/>
+                        <imageCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="Appicon" id="tYb-Tw-Wg3"/>
                     </imageView>
                 </subviews>
                 <constraints>
