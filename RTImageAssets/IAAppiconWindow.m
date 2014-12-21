@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 rickytan. All rights reserved.
 //
 
+#import "RTImageAssets.h"
 #import "IAAppiconWindow.h"
 #import <CoreGraphics/CoreGraphics.h>
 
@@ -17,14 +18,35 @@
 - (void)awakeFromNib
 {
     self.layer.cornerRadius = 120.f;
+    self.layer.masksToBounds = YES;
     self.layer.backgroundColor = [NSColor redColor].CGColor;
+    self.wantsLayer = YES;
 
     [self registerForDraggedTypes:[NSImage imagePasteboardTypes]];
+
+
+}
+
+- (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
+{
+    NSPasteboard *board = [sender draggingPasteboard];
+    NSURL *fileURL = [NSURL URLFromPasteboard:board];
+    if (fileURL) {
+        NSImage *image = [[NSImage alloc] initWithContentsOfURL:fileURL];
+        NSImageRep *rep = [[image representations] firstObject];
+        if (rep.pixelsHigh == 1024 && rep.pixelsWide == 1024) {
+            return YES;
+        }
+    }
+
+    NSBeginAlertSheet(LocalizedString(@"Not Supported!"), LocalizedString(@"OK"), nil, nil, self.window, nil, NULL, NULL, NULL, @"%@", LocalizedString(@"Please provide a 1024X1024 resolution image!"));
+
+    return NO;
 }
 
 @end
 
-@interface IAAppiconWindow ()
+@interface IAAppiconWindow () <NSWindowDelegate>
 @property (weak) IBOutlet NSPopUpButton *osTypeButton;
 @property (weak) IBOutlet NSPopUpButton *deviceTypeButton;
 @property (weak) IBOutlet NSImageView *appIconImageView;
@@ -35,10 +57,12 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 
+    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    NSLog(@"%@", self.appIconImageView.registeredDraggedTypes);
 }
+
+
 
 - (IAIconGenerationDeviceType)deviceType
 {
@@ -50,10 +74,10 @@
     return [self.osTypeButton.menu indexOfItem:self.osTypeButton.selectedItem];
 }
 
-- (void)dismissController:(id)sender
+- (BOOL)windowShouldClose:(id)sender
 {
-    self.appIconImageView.image = [NSImage imageNamed:@"Appicon"];
-    [super dismissController:sender];
+    self.appIconImageView.image = [[RTImageAssets sharedPlugin].bundle imageForResource:@"Appicon"];
+    return YES;
 }
 
 #pragma mark - Actions

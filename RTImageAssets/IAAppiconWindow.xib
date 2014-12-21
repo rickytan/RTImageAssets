@@ -24,7 +24,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="552" height="604"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gji-NG-0sQ">
+                    <popUpButton hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gji-NG-0sQ">
                         <rect key="frame" x="18" y="560" width="76" height="26"/>
                         <popUpButtonCell key="cell" type="push" title="All iOS" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="2xA-FJ-fg8" id="m8h-PP-kK1">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -37,7 +37,7 @@
                             </menu>
                         </popUpButtonCell>
                     </popUpButton>
-                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GgS-5e-ofe">
+                    <popUpButton hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GgS-5e-ofe">
                         <rect key="frame" x="97" y="560" width="92" height="26"/>
                         <popUpButtonCell key="cell" type="push" title="Universal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="KuP-iK-k51" id="9zG-Kk-xxa">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -63,13 +63,13 @@
                             <action selector="onGenerate:" target="-2" id="o22-dj-g25"/>
                         </connections>
                     </button>
-                    <imageView toolTip="Drop your 1024x1024 Icon here" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qyw-Zz-Lgy" customClass="IAImageViewInternal">
-                        <rect key="frame" x="12" y="20" width="528" height="528"/>
+                    <imageView toolTip="Drop your 1024x1024 Icon here" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qyw-Zz-Lgy" customClass="IAImageViewInternal">
+                        <rect key="frame" x="9" y="17" width="534" height="534"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="528" id="Eaf-SK-Wzc"/>
-                            <constraint firstAttribute="height" constant="528" id="oxq-pD-gFz"/>
+                            <constraint firstAttribute="width" constant="522" id="Eaf-SK-Wzc"/>
+                            <constraint firstAttribute="height" constant="522" id="oxq-pD-gFz"/>
                         </constraints>
-                        <imageCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="Appicon" id="tYb-Tw-Wg3"/>
+                        <imageCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" focusRingType="none" alignment="left" animates="YES" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Appicon" id="tYb-Tw-Wg3"/>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -77,7 +77,7 @@
                     <constraint firstItem="gji-NG-0sQ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="Cc0-CR-Ohn"/>
                     <constraint firstItem="GgS-5e-ofe" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="SsB-nM-1Qw"/>
                     <constraint firstItem="pMr-OZ-zQf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="bB0-hp-apI"/>
-                    <constraint firstAttribute="bottom" secondItem="Qyw-Zz-Lgy" secondAttribute="bottom" constant="20" id="e8P-6Y-7Cl"/>
+                    <constraint firstAttribute="bottom" secondItem="Qyw-Zz-Lgy" secondAttribute="bottom" constant="23" id="e8P-6Y-7Cl"/>
                     <constraint firstItem="GgS-5e-ofe" firstAttribute="leading" secondItem="gji-NG-0sQ" secondAttribute="trailing" constant="8" id="jz9-6l-9qP"/>
                     <constraint firstAttribute="centerX" secondItem="Qyw-Zz-Lgy" secondAttribute="centerX" id="mfY-RX-t0c"/>
                     <constraint firstAttribute="trailing" secondItem="pMr-OZ-zQf" secondAttribute="trailing" constant="20" id="q2O-K8-l7g"/>

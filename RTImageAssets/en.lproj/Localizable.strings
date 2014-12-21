@@ -11,3 +11,5 @@
 "OK" = "OK";
 "Please Wait" = "Please wait until process finished";
 "Appicons" = "App Icons";
+"Not Supported!" = "Not Supported!";
+"Please provide a 1024X1024 resolution image!" = "Please provide a 1024X1024 resolution image!";

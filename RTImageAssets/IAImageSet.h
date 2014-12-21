@@ -23,6 +23,12 @@ extern NSString const *IAImageSubtype;
 
 @end
 
+@interface IAIconSet : IAImageSet
+
+- (void)generateAllIcons;
+
+@end
+
 @interface IAImageAssets : NSObject
 @property (nonatomic, readonly) NSArray *imageSets;
 + (instancetype)assetsWithPath:(NSString *)path;
@@ -32,5 +38,6 @@ extern NSString const *IAImageSubtype;
 
 @interface NSImage (Resizing)
 - (NSImage *)resizedImageWithScale:(CGFloat)scale;
+- (NSImage *)resizedImageWithSize:(NSSize)size;
 - (BOOL)saveToFile:(NSString *)filePath withType:(NSBitmapImageFileType)type;
 @end

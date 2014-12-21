@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RTImageAssets/IAAppiconWindow.m"
-            timestampString = "440793550.667553"
+            filePath = "RTImageAssets/IAImageSet.m"
+            timestampString = "440836741.307223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "-dismissController:"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
+            landmarkName = "-generateAllIcons"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RTImageAssets/RTImageAssets.m"
+            timestampString = "440837102.339938"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "-_generateAssets:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

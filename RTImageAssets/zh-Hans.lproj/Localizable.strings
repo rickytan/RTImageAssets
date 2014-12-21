@@ -11,3 +11,5 @@
 "OK" = "好";
 "Please Wait" = "请等待处理完成";
 "Appicons" = "应用图标";
+"Not Supported!" = "不支持！";
+"Please provide a 1024X1024 resolution image!" = "请提供一个 1024X1024 分辨率的图片！";

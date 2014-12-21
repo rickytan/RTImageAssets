@@ -123,13 +123,15 @@ static RTImageAssets *sharedPlugin;
         NSString *currentWorkingDir = [currentWorkspace stringByDeletingPathExtension];
         NSArray *bundlesToProcess = [self assetsBundlesInPath:currentWorkingDir];
 
-        for (NSString *bundlePath in bundlesToProcess) {
-            IAImageAssets *assets = [IAImageAssets assetsWithPath:bundlePath];
-            [assets addToProccesingQueue:self.queue];
+        if (bundlesToProcess.count == 0) {
+            NSBeginAlertSheet(LocalizedString(@"Can't find any .xcassets bundle"), LocalizedString(@"OK"), nil, nil, [NSApp mainWindow], nil, NULL, NULL, NULL, @"This plugin doesn't support origin images in Project resources, please use Asset Catalogs");
         }
-    }
-    else {
-
+        else {
+            for (NSString *bundlePath in bundlesToProcess) {
+                IAImageAssets *assets = [IAImageAssets assetsWithPath:bundlePath];
+                [assets addToProccesingQueue:self.queue];
+            }
+        }
     }
 }
 
@@ -223,7 +225,7 @@ static RTImageAssets *sharedPlugin;
 - (void)appIconWindow:(IAAppiconWindow *)window
 generateIconsWithImage:(NSImage *)image
 {
-
+    
 }
 
 @end

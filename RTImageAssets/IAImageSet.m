@@ -23,9 +23,15 @@ NSString const *IAImageSubtype = @"subtype";
     NSSize pixelSize = NSMakeSize(rep.pixelsWide, rep.pixelsHigh);
     NSSize scaledSize = NSMakeSize(floorf(pixelSize.width * scale), floorf(pixelSize.height * scale));
 
+    return [self resizedImageWithSize:scaledSize];
+}
+
+- (NSImage *)resizedImageWithSize:(NSSize)newSize
+{
+    NSBitmapImageRep *rep = self.representations.firstObject;
     rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
-                                                  pixelsWide:scaledSize.width
-                                                  pixelsHigh:scaledSize.height
+                                                  pixelsWide:newSize.width
+                                                  pixelsHigh:newSize.height
                                                bitsPerSample:8
                                              samplesPerPixel:4
                                                     hasAlpha:YES
@@ -33,16 +39,15 @@ NSString const *IAImageSubtype = @"subtype";
                                               colorSpaceName:rep.colorSpaceName
                                                  bytesPerRow:0
                                                 bitsPerPixel:0];
-    rep.size = scaledSize;
+    rep.size = newSize;
 
     [NSGraphicsContext saveGraphicsState];
     [NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:rep]];
-    [self drawInRect:NSMakeRect(0, 0, scaledSize.width, scaledSize.height)];
+    [self drawInRect:NSMakeRect(0, 0, newSize.width, newSize.height)];
     [NSGraphicsContext restoreGraphicsState];
 
     return [[NSImage alloc] initWithData:[rep representationUsingType:NSPNGFileType
                                                            properties:nil]];
-
 }
 
 - (BOOL)saveToFile:(NSString *)filePath withType:(NSBitmapImageFileType)type
@@ -322,6 +327,15 @@ NSString const *IAImageSubtype = @"subtype";
             }
         }
     }
+}
+
+@end
+
+@implementation IAIconSet
+
+- (void)generateAllIcons
+{
+    
 }
 
 @end
