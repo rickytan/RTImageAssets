@@ -11,10 +11,26 @@
 #import "IAAppiconWindow.h"
 #import "IAWorkspace.h"
 #import "IAImageSet.h"
+#import "XcodeIDE.h"
+
+#include <objc/runtime.h>
+
+@interface DTAssetiLifeDelegate (Hook)
+@end
+
+@implementation DTAssetiLifeDelegate
+
+- (void)assetCategoryController:(id)arg1
+               willDisplayAsset:(id)arg2
+{
+
+}
+
+@end
 
 static RTImageAssets *sharedPlugin;
 
-@interface RTImageAssets() <IAAppiconWindowDelegate>
+@interface RTImageAssets() <IAAppiconWindowDelegate, IDEApplicationEventDelegate>
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
 @property (nonatomic, strong) IASettingsWindow *settingsWindow;
 @property (nonatomic, strong) IAAppiconWindow *iconWindow;
@@ -82,6 +98,17 @@ static RTImageAssets *sharedPlugin;
             self.menuItem = imageAssetsItem;
         }
 
+        size_t count = 0;
+        Ivar *appVars = class_copyIvarList(NSClassFromString(@"IDEApplication"), &count);
+        for (size_t i = 0; i < count; ++i) {
+            NSLog(@"%s", ivar_getName(appVars[i]));
+        }
+
+        [(DVTApplication*)NSApp addActionMonitorWithHandlerBlock:^(id action, id other) {
+            int a=0;
+            a++;
+        }];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onProjectChanged:)
                                                      name:@"PBXProjectDidChangeNotification"
@@ -114,6 +141,8 @@ static RTImageAssets *sharedPlugin;
     _settingsWindow = nil;
 }
 
+#pragma mark - delegate
+
 #pragma mark - Actions
 
 - (void)_generateAssets:(id)sender
@@ -124,7 +153,7 @@ static RTImageAssets *sharedPlugin;
         NSArray *bundlesToProcess = [self assetsBundlesInPath:currentWorkingDir];
 
         if (bundlesToProcess.count == 0) {
-            NSBeginAlertSheet(LocalizedString(@"Can't find any .xcassets bundle"), LocalizedString(@"OK"), nil, nil, [NSApp mainWindow], nil, NULL, NULL, NULL, @"This plugin doesn't support origin images in Project resources, please use Asset Catalogs");
+            NSBeginAlertSheet(LocalizedString(@"Can't find any .xcassets bundle"), LocalizedString(@"OK"), nil, nil, [NSApp mainWindow], nil, NULL, NULL, NULL, @"%@", LocalizedString(@"use Asset Catalogs"));
         }
         else {
             for (NSString *bundlePath in bundlesToProcess) {

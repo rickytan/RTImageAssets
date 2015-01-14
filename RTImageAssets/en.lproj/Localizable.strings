@@ -13,3 +13,5 @@
 "Appicons" = "App Icons";
 "Not Supported!" = "Not Supported!";
 "Please provide a 1024X1024 resolution image!" = "Please provide a 1024X1024 resolution image!";
+"Can't find any .xcassets bundle" = "Can't find any .xcassets bundle";
+"use Asset Catalogs" = "This plugin doesn't support origin images in Project resources, please use Asset Catalogs";

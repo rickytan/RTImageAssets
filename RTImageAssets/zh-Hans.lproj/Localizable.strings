@@ -13,3 +13,5 @@
 "Appicons" = "应用图标";
 "Not Supported!" = "不支持！";
 "Please provide a 1024X1024 resolution image!" = "请提供一个 1024X1024 分辨率的图片！";
+"Can't find any .xcassets bundle" = "找不到 .xcassets 文件夹";
+"use Asset Catalogs" = "此插件不支持项目中的原始图片文件，请使用 Asset Catalogs";
