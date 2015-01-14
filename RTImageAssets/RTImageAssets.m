@@ -149,6 +149,10 @@ static RTImageAssets *sharedPlugin;
 {
     NSString *currentWorkspace = [IAWorkspace currentWorkspacePath];
     if (currentWorkspace) {
+        // issue #13 https://github.com/rickytan/RTImageAssets/issues/13
+        if (self.queue.operationCount)
+            return;
+
         NSString *currentWorkingDir = [currentWorkspace stringByDeletingPathExtension];
         NSArray *bundlesToProcess = [self assetsBundlesInPath:currentWorkingDir];
 

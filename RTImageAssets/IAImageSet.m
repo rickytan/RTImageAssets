@@ -21,6 +21,11 @@ NSString const *IAImageSubtype = @"subtype";
 {
     NSBitmapImageRep *rep = self.representations.firstObject;
     NSSize pixelSize = NSMakeSize(rep.pixelsWide, rep.pixelsHigh);
+
+    // issue #8
+    if (pixelSize.width == 0.f || pixelSize.height == 0.f) {
+        pixelSize = rep.size;
+    }
     NSSize scaledSize = NSMakeSize(floorf(pixelSize.width * scale), floorf(pixelSize.height * scale));
 
     return [self resizedImageWithSize:scaledSize];
