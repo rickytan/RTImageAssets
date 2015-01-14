@@ -98,17 +98,6 @@ static RTImageAssets *sharedPlugin;
             self.menuItem = imageAssetsItem;
         }
 
-        size_t count = 0;
-        Ivar *appVars = class_copyIvarList(NSClassFromString(@"IDEApplication"), &count);
-        for (size_t i = 0; i < count; ++i) {
-            NSLog(@"%s", ivar_getName(appVars[i]));
-        }
-
-        [(DVTApplication*)NSApp addActionMonitorWithHandlerBlock:^(id action, id other) {
-            int a=0;
-            a++;
-        }];
-
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onProjectChanged:)
                                                      name:@"PBXProjectDidChangeNotification"
