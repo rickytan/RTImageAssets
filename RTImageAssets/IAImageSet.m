@@ -29,12 +29,12 @@ NSString const *IAImageSubtype = @"subtype";
     NSSize scaledSize = NSMakeSize(floorf(pixelSize.width * scale), floorf(pixelSize.height * scale));
 
     rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
-                                                  pixelsWide:scaledSize.width
-                                                  pixelsHigh:scaledSize.height
-                                               bitsPerSample:8
-                                             samplesPerPixel:4
-                                                    hasAlpha:YES
-                                                    isPlanar:NO
+                                                  pixelsWide:newSize.width
+                                                  pixelsHigh:newSize.height
+                                               bitsPerSample:rep.bitsPerSample
+                                             samplesPerPixel:rep.samplesPerPixel
+                                                    hasAlpha:rep.hasAlpha
+                                                    isPlanar:rep.isPlanar
                                               colorSpaceName:rep.colorSpaceName
                                                  bytesPerRow:0
                                                 bitsPerPixel:0];
