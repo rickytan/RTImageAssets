@@ -22,12 +22,20 @@ NSString const *IAImageSubtype = @"subtype";
     NSBitmapImageRep *rep = self.representations.firstObject;
     NSSize pixelSize = NSMakeSize(rep.pixelsWide, rep.pixelsHigh);
 
-    // issue #8
+    // issue #8: https://github.com/rickytan/RTImageAssets/issues/8
     if (pixelSize.width == 0.f || pixelSize.height == 0.f) {
         pixelSize = rep.size;
     }
     NSSize scaledSize = NSMakeSize(floorf(pixelSize.width * scale), floorf(pixelSize.height * scale));
 
+    return [self resizedImageWithSize:scaledSize];
+}
+
+- (NSImage *)resizedImageWithSize:(NSSize)newSize
+{
+    NSBitmapImageRep *rep = self.representations.firstObject;
+
+    // issue #21: https://github.com/rickytan/RTImageAssets/issues/21
     rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
                                                   pixelsWide:newSize.width
                                                   pixelsHigh:newSize.height
@@ -38,16 +46,16 @@ NSString const *IAImageSubtype = @"subtype";
                                               colorSpaceName:rep.colorSpaceName
                                                  bytesPerRow:0
                                                 bitsPerPixel:0];
-    rep.size = scaledSize;
+
+    rep.size = newSize;
 
     [NSGraphicsContext saveGraphicsState];
     [NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:rep]];
-    [self drawInRect:NSMakeRect(0, 0, scaledSize.width, scaledSize.height)];
+    [self drawInRect:NSMakeRect(0, 0, newSize.width, newSize.height)];
     [NSGraphicsContext restoreGraphicsState];
 
     return [[NSImage alloc] initWithData:[rep representationUsingType:NSPNGFileType
                                                            properties:nil]];
-
 }
 
 - (BOOL)saveToFile:(NSString *)filePath withType:(NSBitmapImageFileType)type
