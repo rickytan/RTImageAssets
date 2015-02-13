@@ -34,16 +34,18 @@ NSString const *IAImageSubtype = @"subtype";
 - (NSImage *)resizedImageWithSize:(NSSize)newSize
 {
     NSBitmapImageRep *rep = self.representations.firstObject;
+
     rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
                                                   pixelsWide:newSize.width
                                                   pixelsHigh:newSize.height
-                                               bitsPerSample:8
-                                             samplesPerPixel:4
-                                                    hasAlpha:YES
-                                                    isPlanar:NO
+                                               bitsPerSample:rep.bitsPerSample
+                                             samplesPerPixel:rep.samplesPerPixel
+                                                    hasAlpha:rep.hasAlpha
+                                                    isPlanar:rep.isPlanar
                                               colorSpaceName:rep.colorSpaceName
                                                  bytesPerRow:0
                                                 bitsPerPixel:0];
+
     rep.size = newSize;
 
     [NSGraphicsContext saveGraphicsState];
@@ -340,7 +342,7 @@ NSString const *IAImageSubtype = @"subtype";
 
 - (void)generateAllIcons
 {
-    
+
 }
 
 @end
