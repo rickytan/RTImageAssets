@@ -49,8 +49,26 @@ NSString const *IAImageSubtype = @"subtype";
 
     rep.size = newSize;
 
+    NSGraphicsContext *context = [NSGraphicsContext graphicsContextWithBitmapImageRep:rep];
+
+    if (!context) {
+        // issue #24: https://github.com/rickytan/RTImageAssets/issues/24
+        rep = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+                                                      pixelsWide:newSize.width
+                                                      pixelsHigh:newSize.height
+                                                   bitsPerSample:8
+                                                 samplesPerPixel:4
+                                                        hasAlpha:YES
+                                                        isPlanar:NO
+                                                  colorSpaceName:NSCalibratedRGBColorSpace
+                                                     bytesPerRow:0
+                                                    bitsPerPixel:0];
+        rep.size = newSize;
+        context = [NSGraphicsContext graphicsContextWithBitmapImageRep:rep];
+    }
+
     [NSGraphicsContext saveGraphicsState];
-    [NSGraphicsContext setCurrentContext:[NSGraphicsContext graphicsContextWithBitmapImageRep:rep]];
+    [NSGraphicsContext setCurrentContext:context];
     [self drawInRect:NSMakeRect(0, 0, newSize.width, newSize.height)];
     [NSGraphicsContext restoreGraphicsState];
 
