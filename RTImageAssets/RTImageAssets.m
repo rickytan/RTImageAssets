@@ -46,6 +46,11 @@ static RTImageAssets *sharedPlugin;
         self.bundle = plugin;
 
         [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onApplicationLaunch:)
+                                                     name:NSApplicationDidFinishLaunchingNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onProjectChanged:)
                                                      name:@"PBXProjectDidChangeNotification"
                                                    object:nil];
@@ -149,6 +154,11 @@ static RTImageAssets *sharedPlugin;
 }
 
 #pragma mark - Methods
+
+- (void)onApplicationLaunch:(NSNotification *)notification
+{
+    self.menuItem.enabled = NO;
+}
 
 - (void)onProjectOpen:(NSNotification *)notification
 {
