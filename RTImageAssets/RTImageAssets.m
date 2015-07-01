@@ -215,11 +215,13 @@ static RTImageAssets *sharedPlugin;
 - (void)onProjectClose:(NSNotification *)notification
 {
     self.menuItem.enabled = NO;
+    [self.iconWindow close];
 }
 
 - (void)onProjectChanged:(NSNotification *)notification
 {
     self.menuItem.enabled = YES;
+    [self.iconWindow close];
 }
 
 - (NSArray *)assetsBundlesInPath:(NSString *)path
