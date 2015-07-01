@@ -15,6 +15,12 @@ RTImageAssets [![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)
 
 ![Usage](./ScreenCap/usage.gif)
 
+
+### _新特性！！！_
+- **自动生成所有所需的应用程序图标**。按 `Ctrl+Shift+Option+A` 打开 **App Icon** 窗口，选择 `xcasset`，再选择 `appiconset`，拖拽 **1024x1024** 的大图标到窗口中，点击 **generate**，完成！
+
+![Iconset](./ScreenCap/iconset-gen.gif)
+
 设置
 ---
 ![Setting](./ScreenCap/p.png)
@@ -47,6 +53,11 @@ Features
 - Easy to use, don't need ask for your designer's help any more!
 
 ![Usage](./ScreenCap/usage.gif)
+
+### _New Feature!!!_
+- **Auto generate all the App icons needed**。press `Ctrl+Shift+Option+A` to open **App Icon** window, choose the  `xcasset`, then the `appiconset` you want to use, drag & drop **1024x1024** big icon, and click **generate**, DONE!
+
+![Iconset](./ScreenCap/iconset-gen.gif)
 
 Settings
 ---
