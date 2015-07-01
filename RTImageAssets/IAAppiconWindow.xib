@@ -48,18 +48,18 @@
                     </imageView>
                     <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6kU-ag-7h7" userLabel="Asset">
                         <rect key="frame" x="18" y="560" width="73" height="26"/>
-                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" inset="2" altersStateOfSelectedItem="NO" id="mfk-Ym-FNb">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" inset="2" autoenablesItems="NO" altersStateOfSelectedItem="NO" id="mfk-Ym-FNb">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
-                            <menu key="menu" title="wef" id="ocw-ii-2G3"/>
+                            <menu key="menu" title="wef" autoenablesItems="NO" id="ocw-ii-2G3"/>
                         </popUpButtonCell>
                     </popUpButton>
                     <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PKg-ET-lYI" userLabel="IconSet">
                         <rect key="frame" x="94" y="560" width="100" height="26"/>
-                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" inset="2" id="iIt-zv-TQw">
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" inset="2" autoenablesItems="NO" id="iIt-zv-TQw">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
-                            <menu key="menu" id="QiA-0U-F1f"/>
+                            <menu key="menu" autoenablesItems="NO" id="QiA-0U-F1f"/>
                         </popUpButtonCell>
                     </popUpButton>
                 </subviews>
