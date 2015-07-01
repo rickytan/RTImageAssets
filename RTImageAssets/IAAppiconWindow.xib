@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="IAAppiconWindow">
             <connections>
                 <outlet property="appIconImageView" destination="Qyw-Zz-Lgy" id="fVm-Cb-PH9"/>
-                <outlet property="deviceTypeButton" destination="GgS-5e-ofe" id="rpv-gk-FDg"/>
-                <outlet property="osTypeButton" destination="gji-NG-0sQ" id="MZ4-nA-4gV"/>
+                <outlet property="generateButton" destination="pMr-OZ-zQf" id="DVh-bX-ee7"/>
+                <outlet property="iconSetButton" destination="PKg-ET-lYI" id="fF9-JE-gbP"/>
+                <outlet property="imageAssetButton" destination="6kU-ag-7h7" id="7Bi-L3-8ia"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -19,40 +20,11 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="552" height="604"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="552" height="604"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <popUpButton hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gji-NG-0sQ">
-                        <rect key="frame" x="18" y="560" width="76" height="26"/>
-                        <popUpButtonCell key="cell" type="push" title="All iOS" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="2xA-FJ-fg8" id="m8h-PP-kK1">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
-                            <menu key="menu" id="jBS-cq-a0F">
-                                <items>
-                                    <menuItem title="All iOS" state="on" id="2xA-FJ-fg8"/>
-                                    <menuItem title="iOS7+" id="Fbz-co-3cO"/>
-                                </items>
-                            </menu>
-                        </popUpButtonCell>
-                    </popUpButton>
-                    <popUpButton hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GgS-5e-ofe">
-                        <rect key="frame" x="97" y="560" width="92" height="26"/>
-                        <popUpButtonCell key="cell" type="push" title="Universal" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="KuP-iK-k51" id="9zG-Kk-xxa">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
-                            <menu key="menu" id="s6e-e2-2c1">
-                                <items>
-                                    <menuItem title="Universal" state="on" id="KuP-iK-k51"/>
-                                    <menuItem title="iPhone" id="8yU-kL-lsb">
-                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                    </menuItem>
-                                    <menuItem title="iPad" id="0ev-0S-L4j"/>
-                                </items>
-                            </menu>
-                        </popUpButtonCell>
-                    </popUpButton>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pMr-OZ-zQf">
                         <rect key="frame" x="441" y="556" width="97" height="32"/>
                         <buttonCell key="cell" type="push" title="Generate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bEo-AR-2wt">
@@ -63,30 +35,49 @@
                             <action selector="onGenerate:" target="-2" id="o22-dj-g25"/>
                         </connections>
                     </button>
-                    <imageView toolTip="Drop your 1024x1024 Icon here" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qyw-Zz-Lgy" customClass="IAImageViewInternal">
+                    <imageView toolTip="Drop your 1024x1024 Icon here" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qyw-Zz-Lgy" customClass="IAImageViewInternal">
                         <rect key="frame" x="9" y="17" width="534" height="534"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="522" id="Eaf-SK-Wzc"/>
-                            <constraint firstAttribute="height" constant="522" id="oxq-pD-gFz"/>
+                            <constraint firstAttribute="width" constant="528" id="Eaf-SK-Wzc"/>
+                            <constraint firstAttribute="height" constant="528" id="oxq-pD-gFz"/>
                         </constraints>
                         <imageCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" focusRingType="none" alignment="left" animates="YES" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Appicon" id="tYb-Tw-Wg3"/>
+                        <connections>
+                            <action selector="onDropImage:" target="-2" id="OJj-of-NT3"/>
+                        </connections>
                     </imageView>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6kU-ag-7h7" userLabel="Asset">
+                        <rect key="frame" x="18" y="560" width="73" height="26"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" inset="2" altersStateOfSelectedItem="NO" id="mfk-Ym-FNb">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" title="wef" id="ocw-ii-2G3"/>
+                        </popUpButtonCell>
+                    </popUpButton>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PKg-ET-lYI" userLabel="IconSet">
+                        <rect key="frame" x="94" y="560" width="100" height="26"/>
+                        <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" inset="2" id="iIt-zv-TQw">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" id="QiA-0U-F1f"/>
+                        </popUpButtonCell>
+                    </popUpButton>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="gji-NG-0sQ" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="4Lr-R7-68n"/>
-                    <constraint firstItem="gji-NG-0sQ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="Cc0-CR-Ohn"/>
-                    <constraint firstItem="GgS-5e-ofe" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="SsB-nM-1Qw"/>
+                    <constraint firstItem="6kU-ag-7h7" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="Utn-uR-pIU"/>
+                    <constraint firstItem="PKg-ET-lYI" firstAttribute="leading" secondItem="6kU-ag-7h7" secondAttribute="trailing" constant="8" id="aX3-tg-dfx"/>
                     <constraint firstItem="pMr-OZ-zQf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="bB0-hp-apI"/>
-                    <constraint firstAttribute="bottom" secondItem="Qyw-Zz-Lgy" secondAttribute="bottom" constant="23" id="e8P-6Y-7Cl"/>
-                    <constraint firstItem="GgS-5e-ofe" firstAttribute="leading" secondItem="gji-NG-0sQ" secondAttribute="trailing" constant="8" id="jz9-6l-9qP"/>
+                    <constraint firstAttribute="bottom" secondItem="Qyw-Zz-Lgy" secondAttribute="bottom" constant="20" id="e8P-6Y-7Cl"/>
                     <constraint firstAttribute="centerX" secondItem="Qyw-Zz-Lgy" secondAttribute="centerX" id="mfY-RX-t0c"/>
                     <constraint firstAttribute="trailing" secondItem="pMr-OZ-zQf" secondAttribute="trailing" constant="20" id="q2O-K8-l7g"/>
+                    <constraint firstItem="6kU-ag-7h7" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="sW5-ue-qqN"/>
+                    <constraint firstItem="PKg-ET-lYI" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="upk-vz-G6f"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="547" y="351"/>
+            <point key="canvasLocation" x="889" y="610"/>
         </window>
     </objects>
     <resources>

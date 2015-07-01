@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class IAAppiconWindow;
+@class IAIconSet;
 
 @protocol IAAppiconWindowDelegate <NSObject>
 @optional
@@ -30,6 +31,8 @@ typedef NS_ENUM(NSInteger, IAIconGenerationDeviceType) {
 
 @interface IAAppiconWindow : NSWindowController
 @property (nonatomic, assign) IBOutlet id<IAAppiconWindowDelegate> delegate;
-@property (nonatomic, readonly) IAIconGenerationOSType OSType;
-@property (nonatomic, readonly) IAIconGenerationDeviceType deviceType;
+@property (nonatomic, readonly) IAIconSet *selectedIconSet;
+
+@property (nonatomic, strong) NSArray *imageAssets;
+
 @end

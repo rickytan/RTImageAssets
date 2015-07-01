@@ -12,6 +12,7 @@
 
 NSString const *IAImageIdiom = @"idiom";
 NSString const *IAImageScale = @"scale";
+NSString const *IAImageSize = @"size";
 NSString const *IAImageFilename = @"filename";
 NSString const *IAImageSubtype = @"subtype";
 
@@ -95,6 +96,7 @@ NSString const *IAImageSubtype = @"subtype";
 @end
 
 @interface IAImageSet ()
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, copy) NSString *path;
 @property (nonatomic, strong) NSMutableDictionary *contentInfo;
 @property (nonatomic, assign, getter=isChanged) BOOL changed;
@@ -116,6 +118,7 @@ NSString const *IAImageSubtype = @"subtype";
     self = [super init];
     if (self) {
         self.path = path;
+        self.name = path.stringByDeletingPathExtension.pathComponents.lastObject;
 
         NSString *contentFile = [self.path stringByAppendingPathComponent:@"Contents.json"];
         NSData *data = [NSData dataWithContentsOfFile:contentFile];
@@ -360,16 +363,66 @@ NSString const *IAImageSubtype = @"subtype";
 
 @implementation IAIconSet
 
-- (void)generateAllIcons
+- (NSString *)imageNameForSize:(NSString *)sizeStr
 {
+    NSDictionary *sizeName = @{@"29x29": @"Icon-Small",
+                               @"40x40": @"Icon-Spotlight-40",
+                               @"50x50": @"Icon-Small-50",
+                               @"57x57": @"Icon",
+                               @"60x60": @"Icon-60",
+                               @"72x72": @"Icon-72",
+                               @"76x76": @"Icon-76"};
+    return sizeName[sizeStr] ?: [@"Icon-" stringByAppendingString:[sizeStr componentsSeparatedByString:@"x"].firstObject];
+}
 
+- (void)generateAllIcons:(NSImage *)image
+{
+    @synchronized(self) {
+        NSString *contentFile = [self.path stringByAppendingPathComponent:@"Contents.json"];
+        NSData *data = [NSData dataWithContentsOfFile:contentFile];
+        if (data) {
+            NSError *error = nil;
+            self.contentInfo = [NSJSONSerialization JSONObjectWithData:data
+                                                               options:NSJSONReadingMutableContainers
+                                                                 error:&error];
+            if (error) {
+                NSLog(@"%@", error);
+            }
+        }
+
+        for (NSMutableDictionary *img in self.images) {
+            if (![img[IAImageFilename] length] || !
+                [[NSFileManager defaultManager] fileExistsAtPath:[self.path stringByAppendingPathComponent:img[IAImageFilename]]]) {
+                NSString *filename = [self imageNameForSize:img[IAImageSize]];
+                NSInteger scale = [img[IAImageScale] integerValue];
+                CGFloat size = [img[IAImageSize] floatValue];
+                if (scale > 1) {
+                    filename = [NSString stringWithFormat:@"%@@%@", filename, img[IAImageScale]];
+                }
+                filename = [filename stringByAppendingPathExtension:@"png"];
+                NSImage *iconImage = [image resizedImageWithSize:NSMakeSize(size * scale, size * scale)];
+                if ([iconImage saveToFile:[self.path stringByAppendingPathComponent:filename]
+                                 withType:NSPNGFileType]) {
+                    img[IAImageFilename] = filename;
+                }
+            }
+        }
+
+        [[NSJSONSerialization dataWithJSONObject:self.contentInfo
+                                         options:NSJSONWritingPrettyPrinted
+                                           error:NULL]
+         writeToFile:[self.path stringByAppendingPathComponent:@"Contents.json"]
+         atomically:NO];
+    }
 }
 
 @end
 
 @interface IAImageAssets ()
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, copy) NSString *path;
 @property (nonatomic, strong) NSArray *imageSets;
+@property (nonatomic, strong) NSArray *iconSets;
 @end
 
 @implementation IAImageAssets
@@ -384,17 +437,26 @@ NSString const *IAImageSubtype = @"subtype";
     self = [super init];
     if (self) {
         self.path = path;
+        self.name = path.stringByDeletingPathExtension.pathComponents.lastObject;
 
         NSArray *items = [self allFilesInDirectoryAtPath:path];
 
         NSPredicate *filter = [NSPredicate predicateWithFormat:@"pathExtension = 'imageset'"];
-        items = [items filteredArrayUsingPredicate:filter];
+        NSArray *arr = [items filteredArrayUsingPredicate:filter];
         NSMutableArray *images = [NSMutableArray arrayWithCapacity:items.count];
-        for (NSURL *p in items) {
+        for (NSURL *p in arr) {
             IAImageSet *imageSet = [IAImageSet imageSetWithPath:p.path];
             [images addObject:imageSet];
         }
         self.imageSets = [NSArray arrayWithArray:images];
+
+        arr = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pathExtension = 'appiconset'"]];
+        [images removeAllObjects];
+        for (NSURL *p in arr) {
+            IAIconSet *icon = [IAIconSet imageSetWithPath:p.path];
+            [images addObject:icon];
+        }
+        self.iconSets = [NSArray arrayWithArray:images];
     }
 
     return self;

@@ -8,6 +8,7 @@
 
 #import "RTImageAssets.h"
 #import "IAAppiconWindow.h"
+#import "IAImageSet.h"
 #import <CoreGraphics/CoreGraphics.h>
 
 @interface IAImageViewInternal : NSImageView
@@ -47,9 +48,10 @@
 @end
 
 @interface IAAppiconWindow () <NSWindowDelegate>
-@property (weak) IBOutlet NSPopUpButton *osTypeButton;
-@property (weak) IBOutlet NSPopUpButton *deviceTypeButton;
+@property (weak) IBOutlet NSPopUpButton *imageAssetButton;
+@property (weak) IBOutlet NSPopUpButton *iconSetButton;
 @property (weak) IBOutlet NSImageView *appIconImageView;
+@property (weak) IBOutlet NSButton *generateButton;
 
 @end
 
@@ -57,21 +59,9 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    self.generateButton.enabled = NO;
 
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-    NSLog(@"%@", self.appIconImageView.registeredDraggedTypes);
-}
-
-
-
-- (IAIconGenerationDeviceType)deviceType
-{
-    return [self.deviceTypeButton.menu indexOfItem:self.deviceTypeButton.selectedItem];
-}
-
-- (IAIconGenerationOSType)OSType
-{
-    return [self.osTypeButton.menu indexOfItem:self.osTypeButton.selectedItem];
+    [self reloadMenu];
 }
 
 - (BOOL)windowShouldClose:(id)sender
@@ -80,13 +70,71 @@
     return YES;
 }
 
+- (void)reloadSecondMenu
+{
+    [self.iconSetButton.menu removeAllItems];
+    if (self.imageAssetButton.selectedItem) {
+        IAImageAssets *asset = self.imageAssetButton.selectedItem.representedObject;
+
+        for (IAIconSet *icon in asset.iconSets) {
+            NSMenuItem *subitem = [self.iconSetButton.menu addItemWithTitle:icon.name
+                                                                     action:@selector(onSelect:)
+                                                              keyEquivalent:@""];
+            subitem.representedObject = icon;
+        }
+    }
+}
+
+- (IAIconSet *)selectedIconSet
+{
+    return self.iconSetButton.selectedItem.representedObject;
+}
+
+- (void)reloadMenu
+{
+    [self.imageAssetButton.menu removeAllItems];
+    for (IAImageAssets *asset in self.imageAssets) {
+        NSMenuItem *item = [self.imageAssetButton.menu addItemWithTitle:asset.name
+                                                                 action:@selector(onSelectAsset:)
+                                                          keyEquivalent:@""];
+        item.representedObject = asset;
+        if (!asset.iconSets.count) {
+            item.enabled = NO;
+        }
+    }
+    [self reloadSecondMenu];
+}
+
+- (void)setImageAssets:(NSArray *)imageAssets
+{
+    _imageAssets = imageAssets;
+    if (self.isWindowLoaded) {
+        [self reloadMenu];
+    }
+}
+
 #pragma mark - Actions
+
+- (void)onSelectAsset:(NSMenuItem *)item {
+    [self reloadSecondMenu];
+}
+
+- (void)onSelect:(NSMenuItem *)item {
+
+}
+
+- (IBAction)onDropImage:(id)sender {
+    self.generateButton.enabled = self.appIconImageView.image != nil;
+    if (!self.appIconImageView.image) {
+        self.appIconImageView.image = [[RTImageAssets sharedPlugin].bundle imageForResource:@"Appicon"];
+    }
+}
 
 - (IBAction)onGenerate:(id)sender {
     if ([self.delegate respondsToSelector:@selector(appIconWindow:generateIconsWithImage:)])
         [self.delegate appIconWindow:self
               generateIconsWithImage:self.appIconImageView.image];
-
+    
 }
 
 

@@ -67,7 +67,7 @@ static RTImageAssets *sharedPlugin;
                                                  selector:@selector(onApplicationLaunch:)
                                                      name:NSApplicationDidFinishLaunchingNotification
                                                    object:nil];
-        
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onProjectChanged:)
                                                      name:@"PBXProjectDidChangeNotification"
@@ -125,6 +125,15 @@ static RTImageAssets *sharedPlugin;
                                                                      keyEquivalent:@"a"];
             generateItem.keyEquivalentModifierMask = NSControlKeyMask | NSShiftKeyMask;
             generateItem.target = self;
+
+            NSMenuItem *appiconItem = [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"AppIcons"
+                                                                                                               value:nil
+                                                                                                               table:nil]
+                                                                           action:@selector(_dropAppicon:)
+                                                                    keyEquivalent:@"a"];
+            appiconItem.target = self;
+            appiconItem.keyEquivalentModifierMask = NSControlKeyMask | NSShiftKeyMask | NSAlternateKeyMask;
+
             [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Settings"
                                                                                      value:nil
                                                                                      table:nil]
@@ -162,7 +171,18 @@ static RTImageAssets *sharedPlugin;
 
 - (void)_dropAppicon:(id)sender
 {
-    [self.iconWindow showWindow:sender];
+    NSString *currentWorkspace = [IAWorkspace currentWorkspacePath];
+    if (currentWorkspace) {
+        NSString *currentWorkingDir = [currentWorkspace stringByDeletingPathExtension];
+        NSArray *bundlesToProcess = [self assetsBundlesInPath:currentWorkingDir];
+        NSMutableArray *arr = [NSMutableArray arrayWithCapacity:bundlesToProcess.count];
+        for (NSString *bundlePath in bundlesToProcess) {
+            IAImageAssets *assets = [IAImageAssets assetsWithPath:bundlePath];
+            [arr addObject:assets];
+        }
+        self.iconWindow.imageAssets = arr;
+        [self.iconWindow showWindow:sender];
+    }
 }
 
 - (void)_settings:(id)sender
@@ -255,7 +275,12 @@ static RTImageAssets *sharedPlugin;
 - (void)appIconWindow:(IAAppiconWindow *)window
 generateIconsWithImage:(NSImage *)image
 {
-    
+    IAIconSet *iconset = window.selectedIconSet;
+    if (iconset) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [iconset generateAllIcons:image];
+        });
+    }
 }
 
 @end

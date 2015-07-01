@@ -9,6 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @class IDEWorkspace;
+@class IDEWorkspaceSettings;
+@class IDEWorkspaceSharedSettings;
+@class IDEWorkspaceUserSettings;
 
 @interface DVTFilePath : NSObject
 @property(readonly) DVTFilePath *symbolicLinkDestinationFilePath;
@@ -47,6 +50,8 @@
 @property(readonly) DVTFilePath *buildIntermediatesFolderPath;
 @end
 
+
+
 @interface IDEWorkspace : NSObject
 @property BOOL isCleaningBuildFolder;
 @property(nonatomic) BOOL finishedLoading;
@@ -56,6 +61,8 @@
 @property(readonly) DVTFilePath *wrappedXcode3ProjectPath;
 @property(readonly) NSString *representingTitle;
 @property(readonly) DVTFilePath *representingFilePath;
+@property(retain, nonatomic) IDEWorkspaceSharedSettings *sharedSettings;
+@property(retain, nonatomic) IDEWorkspaceUserSettings *userSettings;
 @end
 
 @interface DVTLayoutView_ML : NSView

@@ -16,6 +16,7 @@ extern NSString const *IAImageSubtype;
 
 
 @interface IAImageSet : NSObject
+@property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSArray *images;
 
 + (instancetype)imageSetWithPath:(NSString *)path;
@@ -25,13 +26,17 @@ extern NSString const *IAImageSubtype;
 
 @interface IAIconSet : IAImageSet
 
-- (void)generateAllIcons;
+- (void)generateAllIcons:(NSImage* )image;
 
 @end
 
 @interface IAImageAssets : NSObject
+@property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSArray *imageSets;
+@property (nonatomic, readonly) NSArray *iconSets;
+
 + (instancetype)assetsWithPath:(NSString *)path;
+
 - (id)initWithPath:(NSString *)path;
 - (void)addToProccesingQueue:(NSOperationQueue *)queue;
 @end
