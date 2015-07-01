@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 rickytan. All rights reserved.
 //
 
+#import <objc/runtime.h>
 #import "RTImageAssets.h"
 #import "IASettingsWindow.h"
 #import "IAAppiconWindow.h"
@@ -62,42 +63,11 @@ static RTImageAssets *sharedPlugin;
         // reference to plugin's bundle, for resource access
         self.bundle = plugin;
 
-        // Create menu items, initialize UI, etc.
-
-        NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"File"];
-        if (menuItem) {
-            [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
-
-            NSMenuItem *imageAssetsItem = [[menuItem submenu] addItemWithTitle:@"ImageAssets"
-                                                                        action:nil
-                                                                 keyEquivalent:@""];
-            imageAssetsItem.enabled = NO;
-            imageAssetsItem.submenu = [[NSMenu alloc] init];
-            NSMenuItem *generateItem = [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Generate"
-                                                                                                                value:nil
-                                                                                                                table:nil]
-                                                                            action:@selector(_generateAssets:)
-                                                                     keyEquivalent:@"a"];
-            generateItem.keyEquivalentModifierMask = NSControlKeyMask | NSShiftKeyMask;
-            generateItem.target = self;
-
-            NSMenuItem *appiconItem = [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Appicons"
-                                                                                                               value:nil
-                                                                                                               table:nil]
-                                                                           action:@selector(_dropAppicon:)
-                                                                    keyEquivalent:@"a"];
-            appiconItem.target = self;
-            appiconItem.keyEquivalentModifierMask = NSControlKeyMask | NSShiftKeyMask | NSAlternateKeyMask;
-
-            [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Settings"
-                                                                                     value:nil
-                                                                                     table:nil]
-                                                 action:@selector(_settings:)
-                                          keyEquivalent:@""].target = self;
-
-            self.menuItem = imageAssetsItem;
-        }
-
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onApplicationLaunch:)
+                                                     name:NSApplicationDidFinishLaunchingNotification
+                                                   object:nil];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onProjectChanged:)
                                                      name:@"PBXProjectDidChangeNotification"
@@ -133,6 +103,39 @@ static RTImageAssets *sharedPlugin;
 #pragma mark - delegate
 
 #pragma mark - Actions
+
+- (NSMenuItem *)menuItem
+{
+    if (!_menuItem) {
+        // Create menu items, initialize UI, etc.
+
+        NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"File"];
+        if (menuItem) {
+            [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
+
+            NSMenuItem *imageAssetsItem = [[menuItem submenu] addItemWithTitle:@"ImageAssets"
+                                                                        action:nil
+                                                                 keyEquivalent:@""];
+            imageAssetsItem.enabled = NO;
+            imageAssetsItem.submenu = [[NSMenu alloc] init];
+            NSMenuItem *generateItem = [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Generate"
+                                                                                                                value:nil
+                                                                                                                table:nil]
+                                                                            action:@selector(_generateAssets:)
+                                                                     keyEquivalent:@"a"];
+            generateItem.keyEquivalentModifierMask = NSControlKeyMask | NSShiftKeyMask;
+            generateItem.target = self;
+            [[imageAssetsItem submenu] addItemWithTitle:[self.bundle localizedStringForKey:@"Settings"
+                                                                                     value:nil
+                                                                                     table:nil]
+                                                 action:@selector(_settings:)
+                                          keyEquivalent:@""].target = self;
+
+            self.menuItem = imageAssetsItem;
+        }
+    }
+    return _menuItem;
+}
 
 - (void)_generateAssets:(id)sender
 {
@@ -178,6 +181,11 @@ static RTImageAssets *sharedPlugin;
 }
 
 #pragma mark - Methods
+
+- (void)onApplicationLaunch:(NSNotification *)notification
+{
+    self.menuItem.enabled = NO;
+}
 
 - (void)onProjectOpen:(NSNotification *)notification
 {
