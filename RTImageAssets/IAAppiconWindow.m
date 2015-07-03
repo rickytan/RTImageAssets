@@ -20,12 +20,9 @@
 {
     self.layer.cornerRadius = 120.f;
     self.layer.masksToBounds = YES;
-    self.layer.backgroundColor = [NSColor redColor].CGColor;
     self.wantsLayer = YES;
 
     [self registerForDraggedTypes:[NSImage imagePasteboardTypes]];
-
-
 }
 
 - (BOOL)performDragOperation:(id<NSDraggingInfo>)sender
@@ -40,7 +37,7 @@
         }
     }
 
-    NSBeginAlertSheet(LocalizedString(@"Not Supported!"), LocalizedString(@"OK"), nil, nil, self.window, nil, NULL, NULL, NULL, @"%@", LocalizedString(@"Please provide a 1024X1024 resolution image!"));
+    NSBeginAlertSheet(LocalizedString(@"Not Supported!"), LocalizedString(@"OK"), nil, nil, self.window, nil, NULL, NULL, NULL, @"%@", LocalizedString(@"Please provide a 1024x1024 resolution image!"));
 
     return NO;
 }
@@ -67,6 +64,7 @@
 - (BOOL)windowShouldClose:(id)sender
 {
     self.appIconImageView.image = [[RTImageAssets sharedPlugin].bundle imageForResource:@"Appicon"];
+    self.generateButton.enabled = NO;
     return YES;
 }
 
@@ -131,10 +129,10 @@
 }
 
 - (IBAction)onGenerate:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(appIconWindow:generateIconsWithImage:)])
+    if ([self.delegate respondsToSelector:@selector(appIconWindow:generateIconsWithImage:)]) {
         [self.delegate appIconWindow:self
               generateIconsWithImage:self.appIconImageView.image];
-    
+    }
 }
 
 
