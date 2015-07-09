@@ -37,6 +37,12 @@ Issues
 ---
 This plugin is **NOT** fully tested, if you have any problems, please let me know: <https://github.com/rickytan/RTImageAssets/issues>
 
+Alternatives
+---
++ [Prepo](http://wearemothership.com/work/prepo/)
++ [Asset Catalog Creator](https://itunes.apple.com/us/app/asset-catalog-creator-app/id809625456?mt=12)
+
+
 License
 ---
 **MIT**
@@ -77,6 +83,11 @@ License
 问题
 ---
 此插件还没有经过严格测试，如果你有什么问题，请提出：<https://github.com/rickytan/RTImageAssets/issues>
+
+其它选择
+---
++ [Prepo](http://wearemothership.com/work/prepo/)
++ [Asset Catalog Creator](https://itunes.apple.com/us/app/asset-catalog-creator-app/id809625456?mt=12)
 
 协议
 ---
