@@ -1,19 +1,7 @@
-RTImageAssets [![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)](https://travis-ci.org/rickytan/RTImageAssets) [![License](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](./LICENSE)
+RTImageAssets [![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)](https://travis-ci.org/rickytan/RTImageAssets) [![License](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](./LICENSE) [![](https://img.shields.io/gratipay/rickytan.svg)](https://gratipay.com/~rickytan/)
 =============
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="6UA38QRQQKJUU">
-<table>
-<tr><td><input type="hidden" name="on0" value="Donate type">Donate type</td></tr><tr><td><select name="os0">
-	<option value="1 Humberger">1 Humberger $ 0.99 USD</option>
-	<option value="1 cup of Coffee">1 cup of Coffee $ 1.99 USD</option>
-</select> </td></tr>
-</table>
-<input type="hidden" name="currency_code" value="USD">
-<input type="image" src="https://www.paypalobjects.com/zh_XC/C2/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal——最安全便捷的在线支付方式！">
-<img alt="" border="0" src="https://www.paypalobjects.com/zh_XC/i/scr/pixel.gif" width="1" height="1">
-</form>
+[![Donate](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png "Donate me a cup of coffee")](paypal://ricky_tan@live.cn "Donate me a cup of coffee")
 
 Brief
 ---
