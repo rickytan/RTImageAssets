@@ -21,6 +21,11 @@ NSString const *IAImageSubtype = @"subtype";
 - (NSImage *)resizedImageWithScale:(CGFloat)scale
 {
     NSBitmapImageRep *rep = self.representations.firstObject;
+    // issue #56: https://github.com/rickytan/RTImageAssets/issues/56
+    if (![rep isKindOfClass:[NSBitmapImageRep class]]) {
+        return nil;
+    }
+    
     NSSize pixelSize = NSMakeSize(rep.pixelsWide, rep.pixelsHigh);
 
     // issue #8: https://github.com/rickytan/RTImageAssets/issues/8
@@ -285,6 +290,9 @@ NSString const *IAImageSubtype = @"subtype";
 
 - (void)generateMissing
 {
+    if ([@[@"png", @"jpg", @"jpeg", @"bmp", @"tiff"] containsObject:@""]) {
+
+    }
     [self generate1xIfNeeded];
     [self generate2xIfNeeded];
     [self generate3xIfNeeded];
