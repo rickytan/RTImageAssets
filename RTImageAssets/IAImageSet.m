@@ -290,9 +290,6 @@ NSString const *IAImageSubtype = @"subtype";
 
 - (void)generateMissing
 {
-    if ([@[@"png", @"jpg", @"jpeg", @"bmp", @"tiff"] containsObject:@""]) {
-
-    }
     [self generate1xIfNeeded];
     [self generate2xIfNeeded];
     [self generate3xIfNeeded];
