@@ -20,7 +20,7 @@ NSString const *IAImageSubtype = @"subtype";
 
 - (NSImage *)resizedImageWithScale:(CGFloat)scale
 {
-    NSBitmapImageRep *rep = self.representations.firstObject;
+    NSBitmapImageRep *rep = (NSBitmapImageRep *)self.representations.firstObject;
     // issue #56: https://github.com/rickytan/RTImageAssets/issues/56
     if (![rep isKindOfClass:[NSBitmapImageRep class]]) {
         return nil;
@@ -39,7 +39,7 @@ NSString const *IAImageSubtype = @"subtype";
 
 - (NSImage *)resizedImageWithSize:(NSSize)newSize
 {
-    NSBitmapImageRep *rep = self.representations.firstObject;
+    NSBitmapImageRep *rep = (NSBitmapImageRep *)self.representations.firstObject;
 
 
     // issue #21: https://github.com/rickytan/RTImageAssets/issues/21
