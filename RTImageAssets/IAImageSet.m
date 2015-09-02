@@ -222,9 +222,11 @@ NSString const *IAImageSubtype = @"subtype";
         idx = [self get3xImageIndex];
         if (idx == NSNotFound) {
             scale = 1.f / 2;
+            /*
             if ([[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"]) {
                 scale /= 750.f / 640.f;
             }
+             */
             idx = [self get2xImageIndex];
         }
         if (idx != NSNotFound) {
@@ -252,7 +254,7 @@ NSString const *IAImageSubtype = @"subtype";
     if (idx != NSNotFound) {
         NSString *imgName = self.images[idx][IAImageFilename];
         NSImage *img = [[NSImage alloc] initWithData:[NSData dataWithContentsOfFile:[self.path stringByAppendingPathComponent:imgName]]];
-        CGFloat scale = [[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"] ? 750.f/960 : 640.f/960;
+        CGFloat scale = 640.f/960;// [[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"] ? 750.f/960 : 640.f/960;
         NSImage *scaledImage = [img resizedImageWithScale:scale];
         NSString *fileName = [self filenameForImageName:imgName
                                        ofScaleExtension:@"@2x"];
@@ -275,7 +277,7 @@ NSString const *IAImageSubtype = @"subtype";
         if (idx != NSNotFound) {
             NSString *imgName = self.images[idx][IAImageFilename];
             NSImage *img = [[NSImage alloc] initWithData:[NSData dataWithContentsOfFile:[self.path stringByAppendingPathComponent:imgName]]];
-            CGFloat scale = [[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"] ? 960.f/750 : 960.f/640;
+            CGFloat scale = 960.f/640;// [[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"] ? 960.f/750 : 960.f/640;
             NSImage *scaledImage = [img resizedImageWithScale:scale];
             NSString *fileName = [self filenameForImageName:imgName
                                            ofScaleExtension:@"@3x"];
