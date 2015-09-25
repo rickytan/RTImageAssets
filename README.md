@@ -9,7 +9,7 @@ A Xcode plugin to automatically generate @2x, @1x image from @3x image for you, 
 
 _NOTICE_
 ---
-You have to put your `.xcassets` in the folder the same name with the project, whith means, if your project is abc.xcodeproj, and the assets must be in the abc folder
+You have to put your `.xcassets` in the folder the same name with the project, which means, if your project is `abc.xcodeproj`, and the assets must be in the `abc` folder
 
 
 Features
