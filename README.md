@@ -1,7 +1,7 @@
 RTImageAssets [![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)](https://travis-ci.org/rickytan/RTImageAssets) [![License](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](./LICENSE) [![](https://img.shields.io/gratipay/rickytan.svg)](https://gratipay.com/~rickytan/)
 =============
 
-[![Donate](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png "Donate me a cup of coffee")](paypal://ricky_tan@live.cn "Donate me a cup of coffee")
+[![Donate](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png "Donate me a cup of coffee")](http://rickytan.cn/donate/ "Donate me a cup of coffee")
 
 Brief
 ---
