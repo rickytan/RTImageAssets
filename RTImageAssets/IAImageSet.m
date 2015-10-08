@@ -25,7 +25,7 @@ NSString const *IAImageSubtype = @"subtype";
     if (![rep isKindOfClass:[NSBitmapImageRep class]]) {
         return nil;
     }
-    
+
     NSSize pixelSize = NSMakeSize(rep.pixelsWide, rep.pixelsHigh);
 
     // issue #8: https://github.com/rickytan/RTImageAssets/issues/8
@@ -223,9 +223,9 @@ NSString const *IAImageSubtype = @"subtype";
         if (idx == NSNotFound) {
             scale = 1.f / 2;
             /*
-            if ([[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"]) {
-                scale /= 750.f / 640.f;
-            }
+             if ([[[NSUserDefaults standardUserDefaults] stringForKey:IASettingsDownscaleKey] isEqualToString:@"iphone6"]) {
+             scale /= 750.f / 640.f;
+             }
              */
             idx = [self get2xImageIndex];
         }
@@ -351,7 +351,7 @@ NSString const *IAImageSubtype = @"subtype";
                 filename = [renameFilename stringByAppendingString:@"-568h"];
             }
 
-            if (![dic[IAImageScale] isEqualToString:@"1x"]) {
+            if (dic[IAImageScale] && ![dic[IAImageScale] isEqualToString:@"1x"]) {
                 filename = [NSString stringWithFormat:@"%@@%@", filename, dic[IAImageScale]];
             }
             filename = [filename stringByAppendingPathExtension:ext];
