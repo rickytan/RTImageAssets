@@ -15,6 +15,7 @@ NSString const *IAImageScale = @"scale";
 NSString const *IAImageSize = @"size";
 NSString const *IAImageFilename = @"filename";
 NSString const *IAImageSubtype = @"subtype";
+NSString const *IAImageResizing = @"resizing";
 
 @implementation NSImage (Resizing)
 
@@ -148,13 +149,67 @@ NSString const *IAImageSubtype = @"subtype";
 - (void)setFilename:(NSString *)filename
            forScale:(NSString *)scale
 {
+    [self setFilename:filename
+             forScale:scale
+             resizing:nil];
+}
+
+- (void)setFilename:(NSString *)filename
+           forScale:(NSString *)scale
+           resizing:(NSDictionary *)resizing
+{
     for (id obj in self.images) {
         if ([obj[IAImageScale] isEqualToString:scale] &&
             ([@[@"iphone", @"universal"] containsObject:obj[IAImageIdiom]])) {
             obj[IAImageFilename] = filename;
+            if (resizing) obj[IAImageResizing] = resizing;
             self.changed = YES;
         }
     }
+}
+
+- (NSDictionary *)resizingFromResizing:(NSDictionary *)resizingParam
+                             withScale:(CGFloat)scale
+                             imageSize:(NSSize)size
+{
+    NSMutableDictionary *value = nil;
+    if (resizingParam) {
+        // Must deep copy !!!
+        value = [[NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:resizingParam]] mutableCopy];
+
+        CGFloat width = size.width, height = size.height;
+        if (value[@"cap-insets"]) {
+            if (value[@"cap-insets"][@"bottom"]) {
+                CGFloat bottom = ceilf([value[@"cap-insets"][@"bottom"] floatValue] * scale);
+                height -= bottom;
+                value[@"cap-insets"][@"bottom"] = @(bottom);
+            }
+            if (value[@"cap-insets"][@"top"]) {
+                CGFloat top = ceilf([value[@"cap-insets"][@"top"] floatValue] * scale);
+                height -= top;
+                value[@"cap-insets"][@"top"] = @(top);
+            }
+            if (value[@"cap-insets"][@"right"]) {
+                CGFloat right = ceilf([value[@"cap-insets"][@"right"] floatValue] * scale);
+                width -= right;
+                value[@"cap-insets"][@"right"] = @(right);
+            }
+            if (value[@"cap-insets"][@"left"]) {
+                CGFloat left = ceilf([value[@"cap-insets"][@"left"] floatValue] * scale);
+                width -= left;
+                value[@"cap-insets"][@"left"] = @(left);
+            }
+        }
+        if (value[@"center"]) {
+            if (value[@"center"][@"width"]) {
+                value[@"center"][@"width"] = @(MAX(1, MIN(width, ceilf([value[@"center"][@"width"] floatValue] * scale))));
+            }
+            if (value[@"center"][@"height"]) {
+                value[@"center"][@"height"] = @(MAX(1, MIN(height, ceilf([value[@"center"][@"height"] floatValue] * scale))));
+            }
+        }
+    }
+    return value;
 }
 
 - (NSString *)filenameForImageName:(NSString *)imageName ofScaleExtension:(NSString *)scaleExt
@@ -238,7 +293,10 @@ NSString const *IAImageSubtype = @"subtype";
             if ([scaledImage saveToFile:[self.path stringByAppendingPathComponent:fileName]
                                withType:NSPNGFileType]) {
                 [self setFilename:fileName
-                         forScale:@"1x"];
+                         forScale:@"1x"
+                         resizing:[self resizingFromResizing:self.images[idx][IAImageResizing]
+                                                   withScale:scale
+                                                   imageSize:scaledImage.size]];
             }
         }
     }
@@ -261,7 +319,10 @@ NSString const *IAImageSubtype = @"subtype";
         if ([scaledImage saveToFile:[self.path stringByAppendingPathComponent:fileName]
                            withType:NSPNGFileType]) {
             [self setFilename:fileName
-                     forScale:@"2x"];
+                     forScale:@"2x"
+                     resizing:[self resizingFromResizing:self.images[idx][IAImageResizing]
+                                               withScale:scale
+                                               imageSize:scaledImage.size]];
         }
     }
 }
@@ -284,7 +345,10 @@ NSString const *IAImageSubtype = @"subtype";
             if ([scaledImage saveToFile:[self.path stringByAppendingPathComponent:fileName]
                                withType:NSPNGFileType]) {
                 [self setFilename:fileName
-                         forScale:@"3x"];
+                         forScale:@"3x"
+                         resizing:[self resizingFromResizing:self.images[idx][IAImageResizing]
+                                                   withScale:scale
+                                                   imageSize:scaledImage.size]];
             }
         }
     }
