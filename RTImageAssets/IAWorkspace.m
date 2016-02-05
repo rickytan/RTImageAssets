@@ -19,7 +19,7 @@
             return controller;
         }
     }
-    return nil;
+    return workspaceWindowControllers.firstObject;
 }
 
 + (IDEWorkspace *)workspaceForKeyWindow
