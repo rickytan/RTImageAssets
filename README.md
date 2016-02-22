@@ -1,5 +1,9 @@
-RTImageAssets [![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)](https://travis-ci.org/rickytan/RTImageAssets) [![License](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](./LICENSE) [![](https://img.shields.io/gratipay/rickytan.svg)](https://gratipay.com/~rickytan/)
+RTImageAssets
 =============
+[![Build Status](https://travis-ci.org/rickytan/RTImageAssets.svg)](https://travis-ci.org/rickytan/RTImageAssets)
+[![License](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](./LICENSE)
+[![Tips](https://img.shields.io/gratipay/rickytan.svg)](https://gratipay.com/~rickytan/)
+[![GitHub stars](https://img.shields.io/github/stars/rickytan/RTImageAssets.svg?style=social&label=Star)](https://github.com/rickytan/RTImageAssets)
 
 [![Donate](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png "Donate me a cup of coffee")](http://rickytan.cn/donate/ "Donate me a cup of coffee")
 
