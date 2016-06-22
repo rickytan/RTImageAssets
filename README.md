@@ -51,6 +51,16 @@ Alternatives
 + [Prepo](http://wearemothership.com/work/prepo/)
 + [Asset Catalog Creator](https://itunes.apple.com/us/app/asset-catalog-creator-app/id809625456?mt=12)
 
+Maybe Interested
+---
++ [RTComponentTableView](https://github.com/rickytan/RTComponentTableView): A Componentized UITableView implementation
++ [RTPlaceholderTextView](https://github.com/rickytan/RTPlaceholderTextView): A UITextView with placeholder support
++ [RTIconButton](https://github.com/rickytan/RTIconButton): A drop-in replacement for UIButton
++ [RTViewAttachment](https://github.com/rickytan/RTViewAttachment): Attach a custom UIView to text view, based on `NSTextAttachment`
++ [RTRootNavigationController](https://github.com/rickytan/RTRootNavigationController): Transparently make every view controller has its own navigation bar
++ [RTPagedCollectionViewLayout](https://github.com/rickytan/RTPagedCollectionViewLayout): A paged collection view layout
++ [RTTinyPNGWebAPIPlugin](https://github.com/rickytan/RTTinyPNGWebAPIPlugin): A Xcode plugin which calls <http://tinypng.com> api to minimize image assets
++ [RTDraggableBadge](https://github.com/rickytan/RTDraggableBadge): A drag to clear badge view
 
 License
 ---
@@ -101,6 +111,17 @@ _注意_
 ---
 + [Prepo](http://wearemothership.com/work/prepo/)
 + [Asset Catalog Creator](https://itunes.apple.com/us/app/asset-catalog-creator-app/id809625456?mt=12)
+
+可能感兴趣
+---
++ [RTComponentTableView](https://github.com/rickytan/RTComponentTableView): A Componentized UITableView implementation
++ [RTPlaceholderTextView](https://github.com/rickytan/RTPlaceholderTextView): A UITextView with placeholder support
++ [RTIconButton](https://github.com/rickytan/RTIconButton): A drop-in replacement for UIButton
++ [RTViewAttachment](https://github.com/rickytan/RTViewAttachment): Attach a custom UIView to text view, based on `NSTextAttachment`
++ [RTRootNavigationController](https://github.com/rickytan/RTRootNavigationController): Transparently make every view controller has its own navigation bar
++ [RTPagedCollectionViewLayout](https://github.com/rickytan/RTPagedCollectionViewLayout): A paged collection view layout
++ [RTTinyPNGWebAPIPlugin](https://github.com/rickytan/RTTinyPNGWebAPIPlugin): A Xcode plugin which calls <http://tinypng.com> api to minimize image assets
++ [RTDraggableBadge](https://github.com/rickytan/RTDraggableBadge): A drag to clear badge view
 
 协议
 ---
