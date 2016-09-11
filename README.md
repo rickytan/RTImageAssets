@@ -10,7 +10,7 @@ RTImageAssets
 
 
 
-It seems ~~**Xcode 8**~~ not supported
+It seems ~~**Xcode 8**~~ not supported, here is a **[Solution](https://github.com/fpg1503/MakeXcodeGr8Again)**, use at your own risk!
 
 Brief
 ---
