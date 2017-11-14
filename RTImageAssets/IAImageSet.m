@@ -81,7 +81,7 @@ NSString const *IAImageResizing = @"resizing";
     [NSGraphicsContext restoreGraphicsState];
 
     return [[NSImage alloc] initWithData:[rep representationUsingType:NSPNGFileType
-                                                           properties:nil]];
+                                                           properties:@{}]];
 }
 
 - (BOOL)saveToFile:(NSString *)filePath withType:(NSBitmapImageFileType)type
@@ -93,7 +93,7 @@ NSString const *IAImageResizing = @"resizing";
     else {
         NSBitmapImageRep *rep = [NSBitmapImageRep imageRepWithData:self.TIFFRepresentation];
         data = [rep representationUsingType:type
-                                 properties:nil];
+                                 properties:@{}];
     }
     return [data writeToFile:filePath
                   atomically:NO];
