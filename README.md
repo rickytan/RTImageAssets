@@ -68,7 +68,7 @@ Maybe Interested
 + [RTPlaceholderTextView](https://github.com/rickytan/RTPlaceholderTextView): A UITextView with placeholder support
 + [RTIconButton](https://github.com/rickytan/RTIconButton): A drop-in replacement for UIButton
 + [RTViewAttachment](https://github.com/rickytan/RTViewAttachment): Attach a custom UIView to text view, based on `NSTextAttachment`
-+ [RTRootNavigationController](https://github.com/rickytan/RTRootNavigationController): Transparently make every view controller has its own navigation bar
++ [RTRootNavigationController](https://github.com/rickytan/RTRootNavigationController): Implicitly make every view controller has its own navigation bar
 + [RTPagedCollectionViewLayout](https://github.com/rickytan/RTPagedCollectionViewLayout): A paged collection view layout
 + [RTTinyPNGWebAPIPlugin](https://github.com/rickytan/RTTinyPNGWebAPIPlugin): A Xcode plugin which calls <http://tinypng.com> api to minimize image assets
 + [RTDraggableBadge](https://github.com/rickytan/RTDraggableBadge): A drag to clear badge view
@@ -137,7 +137,7 @@ _注意_
 + [RTPlaceholderTextView](https://github.com/rickytan/RTPlaceholderTextView): A UITextView with placeholder support
 + [RTIconButton](https://github.com/rickytan/RTIconButton): A drop-in replacement for UIButton
 + [RTViewAttachment](https://github.com/rickytan/RTViewAttachment): Attach a custom UIView to text view, based on `NSTextAttachment`
-+ [RTRootNavigationController](https://github.com/rickytan/RTRootNavigationController): Transparently make every view controller has its own navigation bar
++ [RTRootNavigationController](https://github.com/rickytan/RTRootNavigationController): Implicitly make every view controller has its own navigation bar
 + [RTPagedCollectionViewLayout](https://github.com/rickytan/RTPagedCollectionViewLayout): A paged collection view layout
 + [RTTinyPNGWebAPIPlugin](https://github.com/rickytan/RTTinyPNGWebAPIPlugin): A Xcode plugin which calls <http://tinypng.com> api to minimize image assets
 + [RTDraggableBadge](https://github.com/rickytan/RTDraggableBadge): A drag to clear badge view
