@@ -37,6 +37,7 @@ static RTImageAssets *sharedPlugin;
 @property (nonatomic, strong) IAAppiconWindow *iconWindow;
 @property (nonatomic, strong) NSOperationQueue *queue;
 @property (nonatomic, strong) NSMenuItem *menuItem;
+@property (atomic, strong) NSMutableArray *workspaces;
 @end
 
 @implementation RTImageAssets
@@ -62,6 +63,7 @@ static RTImageAssets *sharedPlugin;
     if (self = [super init]) {
         // reference to plugin's bundle, for resource access
         self.bundle = plugin;
+        self.workspaces = [NSMutableArray array];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onApplicationLaunch:)
@@ -81,6 +83,16 @@ static RTImageAssets *sharedPlugin;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(onProjectClose:)
                                                      name:@"PBXProjectWillCloseNotification"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onProjectClose:)
+                                                     name:@"_IDEWorkspaceClosedNotification"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onContainerOpen:)
+                                                     name:@"IDEContainerDidOpenContainerNotification"
                                                    object:nil];
 
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{IASettingsDownscaleKey: @"iphone5",
@@ -214,7 +226,16 @@ static RTImageAssets *sharedPlugin;
 
 - (void)onProjectClose:(NSNotification *)notification
 {
-    self.menuItem.enabled = NO;
+    if ([notification.object isKindOfClass:NSClassFromString(@"IDEWorkspace")]) {
+        [self.workspaces removeObject:notification.object];
+        
+        if (self.workspaces.count == 0) {
+            self.menuItem.enabled = NO;
+        }
+    }
+    else {
+        self.menuItem.enabled = NO;
+    }
     [self.iconWindow close];
 }
 
@@ -222,6 +243,15 @@ static RTImageAssets *sharedPlugin;
 {
     self.menuItem.enabled = YES;
     [self.iconWindow close];
+}
+
+- (void)onContainerOpen:(NSNotification *)notification
+{
+    if ([notification.object isKindOfClass:NSClassFromString(@"IDEWorkspace")]) {
+        [self.workspaces addObject:notification.object];
+        self.menuItem.enabled = YES;
+        [self.iconWindow close];
+    }
 }
 
 - (NSArray *)assetsBundlesInPath:(NSString *)path
