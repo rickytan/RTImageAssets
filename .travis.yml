@@ -1,2 +1,4 @@
+os: osx
+osx_image: xcode10
 language: objective-c
-script: xctool -project RTImageAssets.xcodeproj -scheme RTImageAssets
+script: xcodebuild
