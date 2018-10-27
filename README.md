@@ -63,6 +63,8 @@ Alternatives
 
 Maybe Interested
 ---
++ [sketch-measure-downloader](https://github.com/rickytan/sketch-measure-downloader): A Chrome extension to download sketch-measure exported asserts as a zip file
++ [XPaste](https://github.com/rickytan/XPaste): A Xcode extension to power up your code paste ability
 + [RTComponentTableView](https://github.com/rickytan/RTComponentTableView): A Componentized UITableView implementation
 + [RTPlaceholderTextView](https://github.com/rickytan/RTPlaceholderTextView): A UITextView with placeholder support
 + [RTIconButton](https://github.com/rickytan/RTIconButton): A drop-in replacement for UIButton
@@ -132,6 +134,8 @@ _注意_
 
 可能感兴趣
 ---
++ [sketch-measure-downloader](https://github.com/rickytan/sketch-measure-downloader): A Chrome extension to download sketch-measure exported asserts as a zip file
++ [XPaste](https://github.com/rickytan/XPaste): A Xcode extension to power up your code paste ability
 + [RTComponentTableView](https://github.com/rickytan/RTComponentTableView): A Componentized UITableView implementation
 + [RTPlaceholderTextView](https://github.com/rickytan/RTPlaceholderTextView): A UITextView with placeholder support
 + [RTIconButton](https://github.com/rickytan/RTIconButton): A drop-in replacement for UIButton
